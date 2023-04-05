@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { user } from 'src/app/interfaces/user.interface';
 import { UsersService } from '../services/users.service';
 import { AuthService } from '../../auth/auth.service';
+import { ImagesService } from 'src/app/cars/images.service';
 
 @Component({
   selector: 'app-update',
@@ -19,7 +20,8 @@ export class UpdateComponent {
   jwt: string | null = null; // Token
 
 //Implementamos el servcio de usuario, activatedRouter, formbuilder, authService y router
-  constructor(private service:UsersService, private route:ActivatedRoute,private fb:FormBuilder, private authService:AuthService, private router:Router){
+  constructor(private service:UsersService, private route:ActivatedRoute,private fb:FormBuilder, private authService:AuthService, private router:Router
+    ,private imageService:ImagesService){
 
   }
   //Json para la peticion
@@ -42,6 +44,11 @@ export class UpdateComponent {
         this.service.getUser(id).subscribe({ // Busca el usuario obtenido por el parámetro
           next:(resp=>{
             this.user=resp //Se lo asigna a la variable user
+            this.json.username=resp.username
+            this.json.name=resp.name
+            this.json.password=resp.password
+            this.json.email=resp.email
+
             if(this.userActual.username!=this.user.username){ //Comprueba que si el usuario actual a editar es distinto del logeado, te envia a pagina notFound
               this.router.navigate(['/**'])
             }
@@ -62,22 +69,37 @@ export class UpdateComponent {
     email:['',[Validators.required, Validators.minLength(3),Validators.email]],
     repeatpassword:['',[Validators.required,Validators.minLength(6),Validators.maxLength(15),this.match('password')]],
     password:['',[Validators.required, Validators.minLength(6),Validators.maxLength(15),]],
-    file:['',[Validators.required]],
-    fileSource:['',[Validators.required]]
 
   })
 
+ 
+
+  addImageForm: FormGroup = this.fb.group({
+    files:['',[Validators.required]],
+    fileSource:['',[Validators.required]] //Archivo el cual añadiremos en la peticion
+  })
+
   //Método para que cambie el archivo cada vez que se cambie el archivo introducido
-  onFileChange(event:any) {
-   
-    
+  onFileChangeImage(event:any) {  
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.myForm.patchValue({
+      this.addImageForm.patchValue({
         fileSource: file
       });
     }
   }
+
+  addImages(){
+    this.service.updateUserImage(this.addImageForm.get('fileSource')?.value, this.json).subscribe({
+      next:(resp)=>{
+        window.location.reload();
+        
+      },error:(e)=>{
+        alert("No se ha podido subir la imagen");
+      }
+    })
+  }
+
 
   //Método para validar cada campo
   isValidField(field:string){

@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
- 
-  urlApi: "https://santoscustom-production.up.railway.app/"
+  urlApi: "http://localhost:8080/"
 };
 

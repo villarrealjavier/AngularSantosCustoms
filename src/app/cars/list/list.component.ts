@@ -13,10 +13,30 @@ export class ListComponent implements OnInit {
 
   constructor(private service:CarsService,private shoppingService:ShoppingService) { }
 
+  responsiveOptions = [
+    {
+      breakpoint: '1024px',
+      numVisible: 3,
+      numScroll: 3,
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 2,
+      numScroll: 2,
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
+
   role:string | null=localStorage.getItem("role") //Obtenemos el rol del localStorage para determinar su vista en el html
   cars:cars[]=[] // Lista de coches para obtener sus coches
   carsRespaldo:cars[]=[] //Almacenaremos nuevamente los coches para utilizarlo en el filtrado
-  totalRecords!:number; // Numero total del items
+  itemsPerPage = 10; // número de productos por página
+  totalItems!:number; // número total de productos
+  productsToDisplay: cars[] = []; // productos a mostrar en cada página
 
   ngOnInit(): void {
     this.service.getCars().subscribe({ //Obtenemos todos los coches y asigamos a ambas listas la respuesta
@@ -26,7 +46,7 @@ export class ListComponent implements OnInit {
       }) 
     })
 
-    this.totalRecords=this.cars.length // Le asignamos el total de coches a la variable
+    this.totalItems=this.cars.length // Le asignamos el total de coches a la variable
 
   }
 
@@ -41,6 +61,12 @@ export class ListComponent implements OnInit {
     }else{
       this.cars=this.carsRespaldo //Si esta vacio devolvemos toda la lista
     }
+  }
+
+  calculateProductsToDisplay(event: any) {
+    const startIndex = event.first;
+    const endIndex = startIndex + event.rows;
+    this.productsToDisplay = this.cars.slice(startIndex, endIndex);
   }
 
   //Añadir a la bolsa de la compra

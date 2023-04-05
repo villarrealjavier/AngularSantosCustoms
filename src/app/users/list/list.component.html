@@ -1,3 +1,4 @@
+
 <app-navbar></app-navbar>
 <div class="container-fluid">
 
@@ -23,9 +24,8 @@
             <th pSortableColumn="username">Username </th>
             <th pSortableColumn="email">Email </th>
             <th pSortableColumn="name">Nombre</th>
-         
-          
             <th>Administrador</th>
+            <th>Opciones</th>
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-user>
@@ -34,6 +34,16 @@
             <td >{{user.username}}</td>
             <td >{{user.email}}</td>
             <td >{{user.name}}</td>
+           
+            <td> 
+              
+              <div class="form-check form-switch" *ngIf="userActual.username!=user.username">
+                
+                <input class="form-check-input" *ngIf="user.role=='ADMIN'" checked (click)="changeRol('USER',user.username)" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                <input class="form-check-input" *ngIf="user.role=='USER'"  (click)="changeRol('ADMIN',user.username)" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+
+              </div>
+            </td>
           
             <td *ngIf="user.username!=usernameActual">
             <button pButton icon="pi pi-trash" [routerLink]="['/users/deleteUsers', user.username]" routerLinkActive="router-link-active"  label="Borrar"></button>

@@ -6,6 +6,7 @@ import { user } from '../../interfaces/user.interface';
 import { UsersService } from '../../users/services/users.service';
 import { cars } from '../../interfaces/cars.interface copy';
 import { ShoppingService } from '../../shopping-cart/services/shopping.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -60,5 +61,7 @@ export class NavbarComponent implements OnInit {
     
 
   }
+
+  
   
 }

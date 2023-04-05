@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { exemplary } from '../../interfaces/exemplary.interface';
 import { CarsService } from '../cars.service';
 import { ExemplaryService } from '../../exemplary/services/exemplary.service';
@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { cars } from '../../interfaces/cars.interface copy';
 import Swal from 'sweetalert2';
+import { ImagesService } from '../images.service';
 
 @Component({
   selector: 'app-update',
@@ -36,13 +37,22 @@ export class UpdateComponent implements OnInit {
   //Implementamos el servicio de modelos, el router, el servicio de coches, formbuilder para la validacion
   // y el activatedRouter para recoger los parametros
   constructor(private exemplaryService:ExemplaryService, private router:Router, 
-    private carService:CarsService,private fb:FormBuilder,private route:ActivatedRoute) { }
+    private carService:CarsService,private fb:FormBuilder,private route:ActivatedRoute, private imageService:ImagesService) { }
 
     ngOnInit(): void {
       const id =this.route.snapshot.params["id"] //Recogemos el identificador del coche
       this.carService.getCarsbyId(id).subscribe({ //Buscamos el coche mediante su identificador
         next:(resp)=>{
           this.car=resp //Asignamos el coche a la variable
+          this.json.num_bastidor=resp.num_bastidor
+          this.json.year=resp.year
+          this.json.color=resp.color
+          this.json.hp=resp.hp
+          this.json.cubic_cent=resp.cubic_cent
+          this.json.sold=resp.sold
+          this.json.price=resp.price
+          this.json.name_exemplary=resp.name_exemplary
+          
           
           
 
@@ -68,10 +78,18 @@ export class UpdateComponent implements OnInit {
     cubic_cent:['',[Validators.required, Validators.min(1000), Validators.max(9000)]],
     name_exemplary:['',[Validators.required]],
     sold:['false',[Validators.required]],
-    file:['',[Validators.required]],
     price:['',[Validators.required, Validators.min(1), Validators.max(5000000)]],
+  
+  })
+
+  addImageForm: FormGroup = this.fb.group({
+    files:['',[Validators.required]],
     fileSource:['',[Validators.required]] //Archivo el cual añadiremos en la peticion
   })
+
+ 
+
+
 //Validacion de campo
   isValidField(field:string){
     return this.addCarForm?.controls[field].errors //Comprobamos si tiene errores, si es inválido y si está modificado
@@ -92,6 +110,47 @@ export class UpdateComponent implements OnInit {
       }
     })
   }
+
+ 
+
+  
+
+  addImages(){
+   
+    this.imageService.addImages(this.addImageForm.get('fileSource')?.value, this.json ).subscribe({
+      next:(resp)=>{
+        window.location.reload();
+      },error:(e)=>{
+        alert("No se ha podido subir la imagen");
+      }
+    })
+  }
+
+  deleteImage(id:number){
+
+    Swal.fire({
+      title: '¿Seguro que quieres borrar la foto?',
+      showDenyButton: true,
+      confirmButtonText: 'Borrar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.imageService.deleteImages(id).subscribe({
+          next:(resp)=>{
+            window.location.reload();
+          },error:(e)=>{
+            alert("No se ha podido subir la imagen");
+          }
+        })
+      } else if (result.isDenied) {
+        Swal.fire('Cambios cancelados', '', 'info')
+      }
+    })
+    
+    
+  }
+
 
 //Metodo para actualizar el coche
   updateCar(){
@@ -147,6 +206,16 @@ export class UpdateComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.addCarForm.patchValue({
+        fileSource: file
+      });
+    }
+  }
+  onFileChangeImage(event:any) {
+   
+    
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.addImageForm.patchValue({
         fileSource: file
       });
     }

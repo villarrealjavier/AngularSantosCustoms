@@ -17,6 +17,7 @@ th {
   background-color: red;
 }
 
+
 @media (max-width: 600px) {
   td, th {
     display: block;

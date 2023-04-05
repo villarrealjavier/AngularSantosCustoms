@@ -14,7 +14,7 @@
         <div class="col-lg-4">
             <div class="card mb-4">
               <div class="card-body text-center" *ngIf="car">
-                <img src="{{car.img}}" alt="avatar"
+                <img src="{{car.listImages[0].img}}" alt="avatar"
                   class="rounded-circle img-fluid" style="width: 160px; height: 150px;">
                 <h5 class="my-3" name="name">{{car.num_bastidor}}</h5>
                 <p class="text-muted mb-1">{{car.name_exemplary.name_brand.name_brand}}</p>

@@ -12,6 +12,8 @@ import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from 'primeng/inputtext';
 import { CarsForBrandComponent } from './cars-for-brand/cars-for-brand.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {GalleriaModule} from 'primeng/galleria';
+import { OneCarComponent } from './one-car/one-car.component';
 
 
 
@@ -21,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AddComponent,
     ListComponent,
     UpdateComponent,
-    CarsForBrandComponent
+    CarsForBrandComponent,
+    OneCarComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +34,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     ButtonModule,
     PaginatorModule,
     InputTextModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GalleriaModule,
+    
+
+
+   
+
 
   ],exports:[
     DeleteComponent,
@@ -39,7 +48,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListComponent,
     UpdateComponent,
     CarsRoutingModule,
-    CarsForBrandComponent
+    CarsForBrandComponent,
+    OneCarComponent
   ]
 })
 export class CarsModule { }

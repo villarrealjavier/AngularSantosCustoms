@@ -6,6 +6,7 @@ import { ListComponent } from './list/list.component';
 import { UpdateComponent } from './update/update.component';
 import { CarsForBrandComponent } from './cars-for-brand/cars-for-brand.component';
 import { RolGuardGuard } from '../rol-guard.guard';
+import { OneCarComponent } from './one-car/one-car.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,12 @@ const routes: Routes = [
       {
         path: 'addCar',
         component: AddComponent,
+        canActivate:[RolGuardGuard]
+    
+      },
+      {
+        path: 'car/:id',
+        component: OneCarComponent,
         canActivate:[RolGuardGuard]
     
       },

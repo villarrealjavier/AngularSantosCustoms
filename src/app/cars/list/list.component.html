@@ -15,7 +15,10 @@
       </div>
   </div>
 
-  <div class="row  d-flex justify-content-center w-100">
+  
+  
+
+ <div class="row  d-flex justify-content-center w-100">
     <div class="row">
       <div class="col-6">
       
@@ -41,18 +44,51 @@
             <th pSortableColumn="color">Color</th>
             <th pSortableColumn="cubic_cent">Centimetros Cúbicos</th>
             <th pSortableColumn="hp">Potencia</th>
+            <th>Ver Modelo</th>
             <th *ngIf="role=='ADMIN'">Administrador</th>
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-car>
           <tr>
-            <td><img align="center" src="{{car.img}}" alt="..." class="centrar img-fluid" width="250px" height="170px" ></td>
+            <td>
+              <p-galleria  [value]="car.listImages" 
+            [containerStyle]="{'max-width': '420px'}" 
+            [numVisible]="3" 
+            
+            [showIndicatorsOnItem]="true" 
+            [showIndicators]="true" 
+            indicatorsPosition="bottom" 
+            [showThumbnails]="false">
+  
+       <ng-template pTemplate="item" let-img>
+              <img [routerLink]="['/cars/car', car.num_bastidor]" [src]="img.img"
+                   style="width: 100%; 
+                          display: block;" />
+       </ng-template>
+  
+       <ng-template pTemplate="indicator" let-i>
+              <div style="background: white; 
+                          padding: 5px; 
+                          border-radius: 10px">
+                     <span style="color: rgb(255, 51, 0); 
+                                  cursor: pointer">
+                                  
+                     </span>
+              </div>
+       </ng-template>
+</p-galleria>
+
+
+              <!--<img src="{{car.listImages[0].img}}" width="250px" height="160px">-->
+              
+            </td>
             <td >{{car.name_exemplary.name_brand.name_brand}}</td>
             <td >{{car.name_exemplary.name_exemplary}}</td>
             <td >{{car.price}}</td>
             <td >{{car.color}}</td>
             <td >{{car.cubic_cent}}</td>
-            <td >{{car.hp}}</td>
+            <td>{{car.hp}}</td>
+           
             
            
             <td *ngIf="role=='USER' && car.sold!=true">

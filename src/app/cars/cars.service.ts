@@ -41,7 +41,6 @@ export class CarsService {
    }
    updateCars(file:File, json:any, num_bastidor:string):Observable<cars>{
     const formData = new FormData(); //Creamos un formdata
-    formData.append('file', file, file.name); //Metememos el file
     formData.append('car', new Blob([JSON.stringify(json)], {type: 'application/json'})); // Metemos el json que almacena el coche
     return this.http.put<cars>(environment.urlApi+"Cars/"+num_bastidor, formData)
 

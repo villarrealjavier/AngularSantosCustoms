@@ -23,7 +23,6 @@ export class UsersService {
   updateUser(json: any, file: File, username:string):Observable<user>{
     const formData = new FormData();
   
-    formData.append('file', file, file.name);
     formData.append('user', new Blob([JSON.stringify(json)], {type: 'application/json'}));
  
     return this.http.put<any>(`${environment.urlApi}users/${username}`,formData)
@@ -32,5 +31,27 @@ export class UsersService {
   deleteUsers(username:string):Observable<user[]>{
     return this.http.delete<any>(`${environment.urlApi}users/${username}`)
   }
+
+  //Peticion para actualizar la imagen de un usuario
+  updateUserImage(file: File,json: any):Observable<user>{
+    const formData = new FormData();
+  
+  
+    formData.append('file', file, file.name);
+    formData.append('user', new Blob([JSON.stringify(json)], {type: 'application/json'}));
+ 
+    return this.http.put<any>(`${environment.urlApi}user/${json.username}`,formData)
+  }
+
+  updateUserRole(json: any):Observable<user>{
+    const formData = new FormData();
+  
+  
+    formData.append('user', new Blob([JSON.stringify(json)], {type: 'application/json'}));
+ 
+    return this.http.put<any>(`${environment.urlApi}userRol/${json.username}`,formData)
+  }
+
+  
 
 }

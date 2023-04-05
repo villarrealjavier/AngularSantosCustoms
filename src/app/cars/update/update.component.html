@@ -9,17 +9,66 @@
           <h3>EDITAR INFORMACION</h3>
         </div>
       </div>
+      
   
       <div class="row">
         <div class="col-lg-4">
             <div class="card mb-4">
               <div class="card-body text-center" *ngIf="car">
-                <img src="{{car.img}}" alt="avatar"
-                  class="rounded-circle img-fluid" style="width: 245px; height: 210px;">
+                
+                <p-galleria *ngIf="car.listImages.length<=3" [value]="car.listImages" 
+                [containerStyle]="{'max-width': '420px'}" 
+                [numVisible]="3" 
+                
+                [showIndicatorsOnItem]="true" 
+                [showIndicators]="true" 
+                indicatorsPosition="bottom" 
+                [showThumbnails]="false">
+      
+           <ng-template pTemplate="item" let-img>
+                  <img (click)="deleteImage(img.id)" [routerLink]="['/cars/car', car.num_bastidor]" [src]="img.img"
+                       style="width: 100%; 
+                              display: block;" />
+           </ng-template>
+      
+           <ng-template pTemplate="indicator" let-i>
+                  <div style="background: white; 
+                              padding: 5px; 
+                              border-radius: 10px">
+                         <span style="color: rgb(255, 51, 0); 
+                                      cursor: pointer">
+                                      
+                         </span>
+                  </div>
+           </ng-template>
+    </p-galleria>
+                  
+         
+<p-galleria *ngIf="car.listImages.length>3" [value]="car.listImages" [autoPlay]="true" [circular]="true"  [numVisible]="5"  [containerStyle]="{ 'max-width': '640px' }"> 
+  <ng-template pTemplate="item" let-item>
+      <img (click)="deleteImage(item.id)" [src]="item.img" style="width: 100%;" />
+  </ng-template>
+  <ng-template pTemplate="thumbnail" let-item>
+      <div class="grid grid-nogutter justify-content-center">
+          <img class="img-fluid" [src]="item.img" />
+      </div>
+  </ng-template>
+</p-galleria>
                 <h5 class="my-3" name="name">{{car.num_bastidor}}</h5>
                 <p class="text-muted mb-1">{{car.name_exemplary.name_brand.name_brand}}</p>
                 
               </div>
+            </div>
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <h4>Añadir imágenes:</h4>
+                <form action="POST" [formGroup]="addImageForm" (ngSubmit)="addImages()" method="post">
+                          <input class="form-control" aria-label="files" formControlName="files" type="file" id="formFiles" (change)="onFileChangeImage($event)">
+                          <br>
+                          <button type="submit" class="btn btn-primary" [disabled]="addImageForm.invalid">Añadir imagen</button>
+                        </form>
+              </div>
+
             </div>
            
           </div>
@@ -170,14 +219,7 @@
               <hr>
               
               <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Imagen de Perfil</p>
-                </div>
-                <div class="col-sm-9">
-                   
-                        <input class="form-control" aria-label="file" formControlName="file" type="file" id="formFile" (change)="onFileChange($event)">
-                        <br>
-                </div>
+                
                <div align="right">
                  <button class="btn btn-primary" type="submit" [disabled]="addCarForm.invalid" >Actualizar</button>&nbsp;&nbsp;
 

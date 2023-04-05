@@ -19,9 +19,34 @@
 <div class="row d-flex justify-content-center w-100" *ngIf="carsbyBrand.length!=0">
     <div class="card m-2" *ngFor="let car of carsbyBrand" style="width: 18rem;">
         <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-        <div class="card-body">
-            <img align="center" src="{{car.img}}" alt="..." class="centrar mb-4 img-fluid" width="230px" height="170px" >
-          <h5 align="center" class="card-title">{{car.name_exemplary.name_brand.name_brand}}</h5>
+        <div class="card-body mb-2">
+          <p-galleria  [value]="car.listImages" 
+          [containerStyle]="{'max-width': '420px'}" 
+          [numVisible]="3" 
+          
+          [showIndicatorsOnItem]="true" 
+          [showIndicators]="true" 
+          indicatorsPosition="bottom" 
+          [showThumbnails]="false">
+
+     <ng-template pTemplate="item" let-img>
+            <img [routerLink]="['/cars/car', car.num_bastidor]" [src]="img.img"
+                 style="width: 100%; 
+                        display: block;" />
+     </ng-template>
+
+     <ng-template pTemplate="indicator" let-i>
+            <div style="background: white; 
+                        padding: 5px; 
+                        border-radius: 10px">
+                   <span style="color: rgb(255, 51, 0); 
+                                cursor: pointer">
+                                
+                   </span>
+            </div>
+     </ng-template>
+</p-galleria>
+          <h5 align="center" class="card-title mt-4">{{car.name_exemplary.name_brand.name_brand}}</h5>
           <p align="center"class="card-text">{{car.name_exemplary.name_exemplary}}</p>
           <p align="center">Precio: {{car.price}}</p>
          
