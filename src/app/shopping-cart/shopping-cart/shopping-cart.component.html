@@ -15,9 +15,41 @@
                             <tbody>
                             <tr *ngFor="let car of listShoppingCart; let i = index">
                                 
-                                <td width="200">
+                                <td width="300">
                                     
                                     <div class="cart-product-imitation">
+                                        <td>
+                                            <p-galleria  [value]="car.listImages" 
+                                          [containerStyle]="{'max-width': '420px'}" 
+                                          [numVisible]="3" 
+                                          
+                                          [showIndicatorsOnItem]="true" 
+                                          [showIndicators]="true" 
+                                          indicatorsPosition="bottom" 
+                                          [showThumbnails]="false">
+                                
+                                     <ng-template pTemplate="item" let-img>
+                                            <img [routerLink]="['/cars/car', car.num_bastidor]" [src]="img.img"
+                                                 style="width: 100%; 
+                                                        display: block;" />
+                                     </ng-template>
+                                
+                                     <ng-template pTemplate="indicator" let-i>
+                                            <div style="background: white; 
+                                                        padding: 5px; 
+                                                        border-radius: 10px">
+                                                   <span style="color: rgb(255, 51, 0); 
+                                                                cursor: pointer">
+                                                                
+                                                   </span>
+                                            </div>
+                                     </ng-template>
+                              </p-galleria>
+                              
+                              
+                                            <!--<img src="{{car.listImages[0].img}}" width="250px" height="160px">-->
+                                            
+                                          </td>
                                     </div>
                                 </td>
                                 <td class="desc">

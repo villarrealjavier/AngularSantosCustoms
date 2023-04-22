@@ -2,3 +2,36 @@
   margin-top: 10%;
   margin-right: 0;
 }
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 767px) {
+  /* Ajustar el ancho de la tabla */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  /* Ajustar la altura de la imagen del producto */
+  .cart-product-imitation {
+    height: 250px;
+    width: 300px;
+    overflow: hidden;
+  }
+
+  /* Ajustar el tamaño de fuente del precio total */
+  .ibox-content h2.font-bold {
+    font-size: 28px;
+  }
+
+  /* Ajustar el ancho de los botones */
+  .btn-primary,
+  .btn-white {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  /* Ajustar el tamaño de fuente del botón de compra */
+  .btn-primary {
+    font-size: 20px;
+  }
+  
+}

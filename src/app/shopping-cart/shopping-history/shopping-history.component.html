@@ -1,0 +1,80 @@
+
+<app-navbar></app-navbar>
+<div class="container-fluid">
+
+<div class="col">
+
+
+  <div class="row">
+      <div class="col-md-6">
+          <h1 class="m-4">Historial de compras:</h1>
+      </div>
+      
+      
+  </div>
+
+  <div class="row  d-flex justify-content-center w-100">
+    
+    <p-table *ngIf="listPurchase" [value]="listPurchase"  [paginator]="true" 
+              [rows]="10" [showCurrentPageReport]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,15,20]">
+      <ng-template pTemplate="header">
+          <tr>
+            <th>Imagen del vehículo</th>
+            <th pSortableColumn="img">Numero de bastidor</th>
+            <th pSortableColumn="username">Usuario</th>
+            <th pSortableColumn="email">Fecha </th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-purchase>
+          <tr>
+            <td>
+                <p-galleria  [value]="purchase.num_bastidor.listImages" 
+              [containerStyle]="{'max-width': '420px'}" 
+              [numVisible]="3" 
+              
+              [showIndicatorsOnItem]="true" 
+              [showIndicators]="true" 
+              indicatorsPosition="bottom" 
+              [showThumbnails]="false">
+    
+         <ng-template pTemplate="item" let-img>
+                <img [src]="img.img"
+                     style="width: 100%; 
+                            display: block;" />
+         </ng-template>
+    
+         <ng-template pTemplate="indicator" let-i>
+                <div style="background: white; 
+                            padding: 5px; 
+                            border-radius: 10px">
+                       <span style="color: rgb(255, 51, 0); 
+                                    cursor: pointer">
+                                    
+                       </span>
+                </div>
+         </ng-template>
+  </p-galleria>
+  
+  
+                <!--<img src="{{car.listImages[0].img}}" width="250px" height="160px">-->
+                
+              </td>
+            <td >{{purchase.num_bastidor.num_bastidor}}</td>
+            <td >{{purchase.username.username}}</td>
+            <td>{{ purchase.date[2]}}-{{purchase.date[1]}}-{{purchase.date[0]}}</td>        
+          </tr>
+      </ng-template>
+  </p-table>
+  </div>
+    
+
+</div>
+
+
+<hr class="hr" />
+<div class="col separacion">
+<app-footer></app-footer>
+</div>
+
+    </div>

@@ -3,6 +3,7 @@ import { cars } from '../../interfaces/cars.interface copy';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Purchase } from 'src/app/interfaces/Purchase.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,11 @@ export class ShoppingService {
   
 
   return this.http.post<any>(`${environment.urlApi}Purchase`,formData)
+}
+
+ //Método que realiza la peticion para grabar la compra
+ getPurchaseByUser(username:string):Observable<Purchase[]>{
+  return this.http.get<any>(`${environment.urlApi}Purchase/${username}`);
 }
 
 

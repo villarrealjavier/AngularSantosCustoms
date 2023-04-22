@@ -3,14 +3,20 @@ import { RouterModule, Routes, CanActivate, CanActivateChild } from '@angular/ro
 
 import { RolGuardGuard } from '../rol-guard.guard';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ShoppingHistoryComponent } from './shopping-history/shopping-history.component';
 
 const routes: Routes = [
   {
     path: '',
     children:[
       {
-        path: '',
+        path: 'cart',
         component: ShoppingCartComponent,
+    
+      },
+      {
+        path: 'history/:id',
+        component: ShoppingHistoryComponent,
     
       },
      

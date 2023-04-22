@@ -1,0 +1,47 @@
+table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #dddddd;
+  }
+  .botonRojo{
+    background-color: red;
+  }
+  
+  
+  @media (max-width: 600px) {
+    td, th {
+      display: block;
+      border: none;
+      text-align: left;
+    }
+    
+    td {
+      border-bottom: 1px solid #dddddd;
+      position: relative;
+      text-align: center;
+    }
+    
+    td::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50%;
+      padding-right: 10px;
+      white-space: nowrap;
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+  
