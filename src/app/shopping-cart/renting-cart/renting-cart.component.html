@@ -1,0 +1,110 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<app-navbar></app-navbar>
+<section style="background-color: #eee;" *ngIf="car">
+    <button id="volver" name="volver" class="btn btn-danger m-4" [routerLink]="['/cars/listCar']" routerLinkActive="router-link-active" >Volver 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+        </svg>
+      </button>
+    <div class="container py-5">
+      <div class="row">
+        <h2 class="mb-4">Elige un plan de renting</h2>
+        
+        <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+          <div class="card">
+            <div class="d-flex justify-content-between p-3">
+              <p class="lead mb-0">12 meses sin intereses</p>
+              <div
+                class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                style="width: 45px; height: 45px;">
+                <p class="text-white mb-0 small">1 año</p>
+              </div>
+            </div>
+            <img class="img-fluid" src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684140884/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/num12_de9r5g.png"
+              class="card-img-top" alt="Laptop" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+               
+    
+              </div>
+  
+              <div class="d-flex justify-content-between mb-3">
+                <h5 class="mb-0 mt-4">{{car.name_exemplary.name_brand.name_brand}}- {{car.name_exemplary.name_exemplary}}</h5>
+                
+                <h5 class="text-dark mb-0 mt-4">{{car.price/12}}€/mes</h5>
+              </div>
+  
+              <div class="d-flex justify-content-center mb-2 mt-4">
+                <button class="btn btn-primary" (click)="acceptRenting(12)">Escoger plan</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+          <div class="card">
+            <div class="d-flex justify-content-between p-3">
+              <p class="lead mb-0">24 meses sin intereses</p>
+              <div
+                class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                style="width: 45px; height: 45px;">
+                <p class="text-white mb-0 small">2 años</p>
+              </div>
+            </div>
+            <img src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684140990/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/num24_bj25bs.png"
+              class="card-img-top" alt="Laptop" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+          
+                
+              </div>
+  
+              <div class="d-flex justify-content-between mb-3">
+                <h5 class="mb-0 mt-4">{{car.name_exemplary.name_brand.name_brand}}- {{car.name_exemplary.name_exemplary}}</h5>
+                
+                <h5 class="text-dark mb-0 mt-4">{{car.price/24}}€/mes</h5>
+              </div>
+  
+              <div class="d-flex justify-content-center mb-2 mt-4">
+                <button class="btn btn-primary" (click)="acceptRenting(24)">Escoger plan</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+          <div class="card">
+            <div class="d-flex justify-content-between p-3">
+              <p class="lead mb-0">48 meses sin intereses</p>
+              <div
+                class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                style="width: 45px; height: 45px;">
+                <p class="text-white mb-0 small">4 años</p>
+              </div>
+            </div>
+            <img src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684141201/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/num48x2_yrzhz1.png"
+              class="card-img-top" alt="Gaming Laptop" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+               
+              </div>
+  
+              <div class="d-flex justify-content-between mb-3">
+                <h5 class="mb-0 mt-4">{{car.name_exemplary.name_brand.name_brand}}- {{car.name_exemplary.name_exemplary}}</h5>
+                
+                <h5 class="text-dark mb-0 mt-4">{{car.price/48}}€/mes</h5>
+              </div>
+  
+              <div class="d-flex justify-content-center mb-2 mt-4">
+                <button class="btn btn-primary" (click)="acceptRenting(48)">Escoger plan</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div class=" separacion">
+    <app-footer></app-footer>
+
+</div>
+

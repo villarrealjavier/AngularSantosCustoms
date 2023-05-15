@@ -26,7 +26,7 @@
                 [showThumbnails]="false">
       
            <ng-template pTemplate="item" let-img>
-                  <img (click)="deleteImage(img.id)" [routerLink]="['/cars/car', car.num_bastidor]" [src]="img.img"
+                  <img (click)="deleteImage(img.id)" [src]="img.img"
                        style="width: 100%; 
                               display: block;" />
            </ng-template>

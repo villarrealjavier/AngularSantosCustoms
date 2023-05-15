@@ -11,13 +11,15 @@ import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { GalleriaModule } from 'primeng/galleria';
+import { RentingCartComponent } from './renting-cart/renting-cart.component';
 
 
 
 @NgModule({
   declarations: [
     ShoppingCartComponent,
-    ShoppingHistoryComponent
+    ShoppingHistoryComponent,
+    RentingCartComponent
   ],
   imports: [
     CommonModule,

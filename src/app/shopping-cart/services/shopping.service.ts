@@ -34,6 +34,17 @@ export class ShoppingService {
   return this.http.get<any>(`${environment.urlApi}Purchase/${username}`);
 }
 
+//Método que realiza la peticion para grabar el renting
+addRenting(num_bastidor:string, username:string, plan:string):Observable<cars[]>{
+  const formData = new FormData(); //Creamos un formulario
+  formData.append('num_bastidor', num_bastidor); //Añadimos el username al formulario
+  formData.append('username', username); //Añadimos el username al formulario
+  formData.append('plan', plan); //Añadimos el username al formulario
+  
+
+  return this.http.post<any>(`${environment.urlApi}Renting`,formData)
+}
+
 
   
 
