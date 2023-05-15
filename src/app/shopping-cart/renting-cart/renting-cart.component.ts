@@ -63,7 +63,7 @@ export class RentingCartComponent {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'No se ha podido obtener la marca!',
+            text: 'No se ha podido realizar el Renting!',
             footer: '<a href="">Why do I have this issue?</a>'
           })
         }

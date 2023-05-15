@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Purchase } from 'src/app/interfaces/Purchase.interface';
+import { Renting } from 'src/app/interfaces/renting.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,11 @@ addRenting(num_bastidor:string, username:string, plan:string):Observable<cars[]>
   
 
   return this.http.post<any>(`${environment.urlApi}Renting`,formData)
+}
+
+ //Método que realiza la peticion para buscar el renting
+getRenting(id:string):Observable<Renting>{
+  return this.http.get<any>(`${environment.urlApi}Renting/${id}`);
 }
 
 

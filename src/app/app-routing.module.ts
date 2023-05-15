@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuardian } from './auth-guardian.service';
+import { CheckingModule } from './checking/checking.module';
 
 
 
@@ -42,6 +43,10 @@ const routes: Routes = [
     path: 'verify',
     loadChildren: () => import('./verify/verify.module').then(m => m.VerifyModule)
     },
+    {
+      path: 'checking',
+      loadChildren: () => import('./checking/checking.module').then(m => m.CheckingModule)
+      },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)

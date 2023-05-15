@@ -1,0 +1,164 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<app-navbar></app-navbar>
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-4">
+          <h3>VEHÍCULO</h3>
+        </div>
+        <div class="col-8">
+          <h3>OPCIONES DE VERIFICACIONES DE RENTING</h3>
+        </div>
+      </div>
+      
+  
+      <div class="row">
+        <div class="col-lg-4">
+            <div class="card mb-4">
+              <div class="card-body text-center" *ngIf="car">
+                <p-galleria *ngIf="car.listImages.length<=3" [value]="car.listImages" 
+                [containerStyle]="{'max-width': '420px'}" 
+                [numVisible]="3" 
+                
+                [showIndicatorsOnItem]="true" 
+                [showIndicators]="true" 
+                indicatorsPosition="bottom" 
+                [showThumbnails]="false">
+      
+           <ng-template pTemplate="item" let-img>
+                  <img [routerLink]="['/cars/car', car.num_bastidor]" [src]="img.img"
+                       style="width: 100%; 
+                              display: block;" />
+           </ng-template>
+      
+           <ng-template pTemplate="indicator" let-i>
+                  <div style="background: white; 
+                              padding: 5px; 
+                              border-radius: 10px">
+                         <span style="color: rgb(255, 51, 0); 
+                                      cursor: pointer">
+                                      
+                         </span>
+                  </div>
+           </ng-template>
+    </p-galleria>
+                  
+         
+<p-galleria *ngIf="car.listImages.length>3" [value]="car.listImages" [autoPlay]="true" [circular]="true"  [numVisible]="5"  [containerStyle]="{ 'max-width': '640px' }"> 
+  <ng-template pTemplate="item" let-item>
+      <img [src]="item.img" style="width: 100%;" />
+  </ng-template>
+  <ng-template pTemplate="thumbnail" let-item>
+      <div class="grid grid-nogutter justify-content-center">
+          <img class="img-fluid" [src]="item.img" />
+      </div>
+  </ng-template>
+</p-galleria>
+                
+                
+                <h5 class="my-3" name="name"><b>Marca: </b>{{car.name_exemplary.name_brand.name_brand}}</h5>
+                <p class="text-muted mb-1"><b>Modelo: </b>{{car.name_exemplary.name_exemplary}}</p>
+                <p class="text-muted mb-1"><b>Número de bastidor: </b>{{car.num_bastidor}}</p>
+                
+              </div>
+            </div>
+           
+          </div>
+          <div class="col-lg-8" *ngIf="car" >
+            
+            <section style="background-color: #eee;" *ngIf="car">
+    
+                <div class="container py-5">
+                  <div class="row">
+                    
+                    
+                    <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+                      <div class="card">
+                        <div class="d-flex justify-content-center p-3">
+                            <h4>Eliminar Renting</h4>
+                          
+                        </div>
+                        <img class="img-fluid" src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684147431/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/eliminar_sy5tib.png"
+                          class="card-img-top" alt="Laptop" />
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between">
+                           
+                
+                          </div>
+              
+                          <div class="d-flex justify-content-between mb-3">
+                            
+                        
+                          </div>
+              
+                          <div class="d-flex justify-content-center mb-2 mt-4">
+                            <button class="btn btn-danger" (click)="deleteRenting()" >Eliminar Renting</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                      <div class="card">
+                        <div class="d-flex justify-content-center p-3">
+                            <h4>Comprar Vehículo</h4>
+                          
+                        </div>
+                        <img src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684147513/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/purchase2_fpylea.svg"
+                          class="card-img-top" alt="Laptop" />
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between">
+                      
+                            
+                          </div>
+              
+                          <div class="d-flex justify-content-between mb-3 mt-4">
+                            
+                          </div>
+              
+                          <div class="d-flex justify-content-center mb-2 mt-4">
+                            <button class="btn btn-warning" >Comprar Vehículo</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                      <div class="card">
+                        <div class="d-flex justify-content-center p-3">
+                            <h4>Cambiar Renting</h4>
+                          
+                        </div>
+                        <img src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684147559/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/change_lylt0t.png"
+                          class="card-img-top" alt="Gaming Laptop" />
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between">
+                           
+                          </div>
+              
+                          <div class="d-flex justify-content-between mb-3">
+                            
+                            
+                          </div>
+              
+                          <div class="d-flex justify-content-center mb-2 mt-4">
+                            <button class="btn btn-primary" >Cambiar Vehículo</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+          </div>
+      </div>
+      
+    </div>
+  </section>
+  
+  
+<div class=" separacion">
+    <app-footer></app-footer>
+
+</div>
+
+
