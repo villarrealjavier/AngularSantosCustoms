@@ -60,4 +60,76 @@ export class CheckingRentingComponent {
       }
     })
   }
+
+  changeRenting(){
+    let idString= this.renting.id.toString()
+    this.checkingService.deleteRenting(idString).subscribe({
+      next:(resp)=>{
+          Swal.fire({
+            icon: 'success',
+            title: 'Renting Eliminado, escoja nuevo renting!',
+            text: 'Estas de vuelta en el listado para elegir nuevo Renting!',
+        });
+        this.router.navigate(['/cars/listCar']) //Redirigimos a la lista de coches
+      },error:(e)=>{ //Si hay algun error, lanzamos un mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No se ha podido eliminar el renting!',
+          footer: '<a href="">Why do I have this issue?</a>'
+        })
+      }
+    })
+  }
+
+  purchaseVehicle(){
+    
+    let fecha1 = new Date(this.renting.date_start);
+    var fecha2=new Date(this.renting.date_end);
+
+    // Obtener los años y meses de diferencia
+    var diffAnios = fecha2.getFullYear() - fecha1.getFullYear();
+
+  // Verificar si la fecha final es anterior a la fecha inicial en el mismo mes y día
+  if (fecha2 < new Date(fecha1.getFullYear() + diffAnios, fecha1.getMonth(), fecha1.getDate())) {
+    diffAnios--;
+  }
+    let precio;
+    console.log(diffAnios)
+
+    let annosString = diffAnios.toString();
+    this.shoppingService.PurchaseCar(this.car,this.username, annosString).subscribe({
+      next:(resp)=>{
+          precio=resp.price;
+          Swal.fire({
+            title: 'Seguro que quiere realizar la compra?',
+            text: "El precio con el descuento por año es de:" + precio,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, comprar!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['/cars/listCar']) //Redirigimos a la lista de coches
+              Swal.fire(
+                'Gracias por su compra!',
+                'Recibirá su coche en unos dias.',
+                'success'
+              )
+            }
+          })
+
+       
+      },error:(e)=>{ //Si hay algun error, lanzamos un mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No se ha podido realizar la compra!',
+          footer: 'Pruebe en otro momento'
+        })
+      }
+    })
+  }
+ 
 }

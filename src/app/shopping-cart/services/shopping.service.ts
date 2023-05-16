@@ -51,6 +51,18 @@ getRenting(id:string):Observable<Renting>{
   return this.http.get<any>(`${environment.urlApi}Renting/${id}`);
 }
 
+ //Método que realiza la peticion para grabar la compra
+ PurchaseCar(car:cars, username:string, diffAnnos:string):Observable<cars>{
+  const formData = new FormData(); //Creamos un formulario
+  formData.append('numbers_bast', new Blob([JSON.stringify(car)], {type: 'application/json'}), 'numbers_bast'); //Añadimos la lista de coches
+  formData.append('username', username); //Añadimos el username al formulario
+  formData.append('annos', diffAnnos); //Añadimos el numero de Años al formulario
+
+  
+
+  return this.http.post<any>(`${environment.urlApi}PurchaseCar`,formData)
+}
+
 
   
 

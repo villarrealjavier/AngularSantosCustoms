@@ -2,7 +2,7 @@
 <app-navbar></app-navbar>
 
 <section style="background-color: #eee;">
-    <div class="container py-5">
+    <div class="container pt-5">
       <div class="row">
         <div class="col-4">
           <h3>VEHÍCULO</h3>
@@ -65,6 +65,9 @@
             </div>
            
           </div>
+      
+
+      
           <div class="col-lg-8" *ngIf="car" >
             
             <section style="background-color: #eee;" *ngIf="car">
@@ -73,17 +76,17 @@
                   <div class="row">
                     
                     
-                    <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+                    <div class="col-md-12 col-lg-6 mb-4 mb-lg-3">
                       <div class="card">
                         <div class="d-flex justify-content-center p-3">
                             <h4>Eliminar Renting</h4>
                           
                         </div>
-                        <img class="img-fluid" src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684147431/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/eliminar_sy5tib.png"
-                          class="card-img-top" alt="Laptop" />
                         <div class="card-body">
-                          <div class="d-flex justify-content-between">
-                           
+                          <img class="img-fluid" src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684147431/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/eliminar_sy5tib.png"
+                            class="card-img-top" alt="Laptop" />
+                          <div class="d-flex justify-content-between mt-4">
+                           <p>Esta opción eliminará el Renting, de manera que finalizará el contrato actual y la asociación del cliente al vehículo que posee actualmente cuando acabe su periodo de Renting.</p>
                 
                           </div>
               
@@ -98,17 +101,43 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                    <div class="col-md-12 col-lg-6 mb-4 mb-lg-3">
+                      <div class="card">
+                        <div class="d-flex justify-content-center p-3">
+                            <h4>Renovar Renting</h4>
+                          
+                        </div>
+                        <div class="card-body">
+                          <img class="img-fluid" src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684229234/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/keys2_davhpg.png"
+                            class="card-img-top" alt="Laptop" />
+                          <div class="d-flex justify-content-between mt-4">
+                            <p> Esta opción redireccionará al sitio web para elegir el nuevo plan deseado, una vez allí se realizará el nuevo Renting, actualizando la fecha de finalización.</p>
+                
+                          </div>
+              
+                          <div class="d-flex justify-content-between mb-3">
+                            
+                        
+                          </div>
+              
+                          <div class="d-flex justify-content-center mb-2 ">
+                            <button class="btn btn-primary" [routerLink]="['/shoppingCart/renting', car.num_bastidor]">Renovar Renting</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                   
+                    <div class="col-md-12 col-lg-6 mb-4 mb-lg-3">
                       <div class="card">
                         <div class="d-flex justify-content-center p-3">
                             <h4>Comprar Vehículo</h4>
                           
                         </div>
-                        <img src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684147513/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/purchase2_fpylea.svg"
-                          class="card-img-top" alt="Laptop" />
                         <div class="card-body">
-                          <div class="d-flex justify-content-between">
-                      
+                          <img class="img-fluid" src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684228767/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/purchase3_guebm3.png"
+                            class="card-img-top" alt="Laptop" />
+                          <div class="d-flex justify-content-between mt-4">
+                            <p> Realizará la compra del vehículo con un descuento de 100€ por año mantenido en Renting</p>
                             
                           </div>
               
@@ -117,21 +146,22 @@
                           </div>
               
                           <div class="d-flex justify-content-center mb-2 mt-4">
-                            <button class="btn btn-warning" >Comprar Vehículo</button>
+                            <button class="btn btn-warning" (click)="purchaseVehicle()">Comprar Vehículo</button>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                    <div class="col-md-12 col-lg-6 mb-4 mb-lg-3">
                       <div class="card">
                         <div class="d-flex justify-content-center p-3">
                             <h4>Cambiar Renting</h4>
                           
                         </div>
-                        <img src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684147559/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/change_lylt0t.png"
-                          class="card-img-top" alt="Gaming Laptop" />
                         <div class="card-body">
-                          <div class="d-flex justify-content-between">
+                          <img class="img-fluid" src="https://res.cloudinary.com/dpatneiyg/image/upload/v1684228297/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/change3_tui2fm.jpg"
+                            class="card-img-top" alt="Gaming Laptop" />
+                          <div class="d-flex justify-content-between mt-4">
+                            <p> Esta opción eliminará el Renting actual y redireccionará al listado para seleccionar un nuevo Renting deseado.</p>
                            
                           </div>
               
@@ -141,7 +171,7 @@
                           </div>
               
                           <div class="d-flex justify-content-center mb-2 mt-4">
-                            <button class="btn btn-primary" >Cambiar Vehículo</button>
+                            <button class="btn btn-primary" (click)="changeRenting()" [routerLink]="['/cars/listCar']" >Cambiar Vehículo</button>
                           </div>
                         </div>
                       </div>
