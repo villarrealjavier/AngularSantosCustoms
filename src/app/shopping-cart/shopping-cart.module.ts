@@ -12,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { GalleriaModule } from 'primeng/galleria';
 import { RentingCartComponent } from './renting-cart/renting-cart.component';
+import { RentingHistoryComponent } from './renting-history/renting-history.component';
 
 
 
@@ -19,7 +20,8 @@ import { RentingCartComponent } from './renting-cart/renting-cart.component';
   declarations: [
     ShoppingCartComponent,
     ShoppingHistoryComponent,
-    RentingCartComponent
+    RentingCartComponent,
+    RentingHistoryComponent,
   ],
   imports: [
     CommonModule,

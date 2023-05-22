@@ -15,6 +15,8 @@ export class RentingCartComponent {
 
   car!:cars //Coche el cual vamos a hacerle el renting
  username!:string
+ precioRenting!:number
+ precioRenting48!:number
  jwt: string | null = null; // Token
   constructor(private route:ActivatedRoute, private carService:CarsService, private shoppingService:ShoppingService,private authService:AuthService,
     private router:Router){
@@ -29,6 +31,8 @@ export class RentingCartComponent {
       this.carService.getCarsbyId(id).subscribe({ //Buscamos el coche mediante su identificador
         next:(resp)=>{
           this.car=resp //Asignamos el coche a la variable
+          this.precioRenting= Math.round((this.car.price/2)/24)
+          this.precioRenting48= Math.round((this.car.price/2)/48)
          //Devuelve el username a partir del token
           
          

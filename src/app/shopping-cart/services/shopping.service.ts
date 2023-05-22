@@ -35,6 +35,11 @@ export class ShoppingService {
   return this.http.get<any>(`${environment.urlApi}Purchase/${username}`);
 }
 
+ //Método que realiza la peticion para obtener el historial de Renting
+ getRentingByUser(username:string):Observable<Renting[]>{
+  return this.http.get<any>(`${environment.urlApi}HistoryRenting/${username}`);
+}
+
 //Método que realiza la peticion para grabar el renting
 addRenting(num_bastidor:string, username:string, plan:string):Observable<cars[]>{
   const formData = new FormData(); //Creamos un formulario
@@ -46,17 +51,30 @@ addRenting(num_bastidor:string, username:string, plan:string):Observable<cars[]>
   return this.http.post<any>(`${environment.urlApi}Renting`,formData)
 }
 
+//Método que realiza la peticion para actualizar el renting
+updateRenting(idRenting:string, username:string, plan:string):Observable<cars[]>{
+  const formData = new FormData(); //Creamos un formulario
+  formData.append('idRenting', idRenting); //Añadimos el username al formulario
+  formData.append('username', username); //Añadimos el username al formulario
+  formData.append('plan', plan); //Añadimos el username al formulario
+  
+
+  return this.http.put<any>(`${environment.urlApi}Renting`,formData)
+}
+
  //Método que realiza la peticion para buscar el renting
 getRenting(id:string):Observable<Renting>{
   return this.http.get<any>(`${environment.urlApi}Renting/${id}`);
 }
 
  //Método que realiza la peticion para grabar la compra
- PurchaseCar(car:cars, username:string, diffAnnos:string):Observable<cars>{
+ PurchaseCar(car:cars, id:string, username:string, diffAnnos:string):Observable<cars>{
   const formData = new FormData(); //Creamos un formulario
   formData.append('numbers_bast', new Blob([JSON.stringify(car)], {type: 'application/json'}), 'numbers_bast'); //Añadimos la lista de coches
   formData.append('username', username); //Añadimos el username al formulario
   formData.append('annos', diffAnnos); //Añadimos el numero de Años al formulario
+  formData.append('idR', id); //Añadimos el numero de Años al formulario
+
 
   
 

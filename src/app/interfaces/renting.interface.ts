@@ -6,5 +6,5 @@ export interface Renting { //Interfaz de marca
     total_import:number,
     cuota_mes:number,
     date_start:Date,
-    date_end:Date
+    date_end:Date,
 }

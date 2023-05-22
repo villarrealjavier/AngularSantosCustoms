@@ -5,6 +5,7 @@ import { RolGuardGuard } from '../rol-guard.guard';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingHistoryComponent } from './shopping-history/shopping-history.component';
 import { RentingCartComponent } from './renting-cart/renting-cart.component';
+import { RentingHistoryComponent } from './renting-history/renting-history.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,12 @@ const routes: Routes = [
         component: RentingCartComponent,
     
       },
+      {
+        path: 'rentingHistory/:id',
+        component: RentingHistoryComponent,
+    
+      },
+     
      
     ]
 

@@ -1,0 +1,84 @@
+
+
+<app-navbar></app-navbar>
+<div class="container-fluid">
+
+<div class="col">
+
+
+  <div class="row">
+      <div class="col-md-6">
+          <h1 class="m-4">Historial de compras:</h1>
+      </div>
+      
+      
+  </div>
+
+  <div class="row  d-flex justify-content-center w-100">
+    
+    <p-table *ngIf="listRenting" [value]="listRenting"  [paginator]="true" 
+              [rows]="10" [showCurrentPageReport]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,15,20]">
+      <ng-template pTemplate="header">
+          <tr>
+            <th>Imagen del vehículo</th>
+            <th>Numero de bastidor</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Finalización </th>
+            <th>Estado </th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-renting>
+          <tr>
+            <td>
+                <p-galleria  [value]="renting.num_bastidor.listImages" 
+              [containerStyle]="{'max-width': '420px'}" 
+              [numVisible]="3" 
+              
+              [showIndicatorsOnItem]="true" 
+              [showIndicators]="true" 
+              indicatorsPosition="bottom" 
+              [showThumbnails]="false">
+    
+         <ng-template pTemplate="item" let-img>
+                <img [src]="img.img"
+                     style="width: 100%; 
+                            display: block;" />
+         </ng-template>
+    
+         <ng-template pTemplate="indicator" let-i>
+                <div style="background: white; 
+                            padding: 5px; 
+                            border-radius: 10px">
+                       <span style="color: rgb(255, 51, 0); 
+                                    cursor: pointer">
+                                    
+                       </span>
+                </div>
+         </ng-template>
+  </p-galleria>
+  
+  
+                <!--<img src="{{car.listImages[0].img}}" width="250px" height="160px">-->
+                
+              </td>
+            <td >{{renting.num_bastidor.num_bastidor}}</td>
+            <td>{{renting.date_start | date:'yyyy-MM-dd'}}</td>   
+            <td>{{renting.date_end | date:'yyyy-MM-dd'}}</td>
+            <td *ngIf="renting.enabled=='1'">ACTIVO</td>    
+            <td *ngIf="renting.enabled=='0'">FINALIZADO</td>   
+          </tr>
+      </ng-template>
+  </p-table>
+  </div>
+    
+
+</div>
+
+
+<hr class="hr" />
+<div class="col separacion">
+<app-footer></app-footer>
+</div>
+
+    </div>

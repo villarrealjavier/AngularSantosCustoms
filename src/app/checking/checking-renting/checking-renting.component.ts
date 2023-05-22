@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 export class CheckingRentingComponent {
 
   num_bastidor!:string
+  id!:string;
   username!:string;
   renting!:Renting
   car!:cars
@@ -27,8 +28,9 @@ export class CheckingRentingComponent {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params=>{
       this.num_bastidor=params['car']  //Recoge el codigo de los parametros mediante los queryParams
+      this.id=params['id']  //Recoge el codigo de los parametros mediante los queryParams
       this.username=params['username']//Recoge el username de los parametros mediante los queryParams
-      this.shoppingService.getRenting(this.num_bastidor).subscribe({
+      this.shoppingService.getRenting(this.id).subscribe({
         next:(resp)=>{
           this.car=resp.num_bastidor;
           this.renting=resp;
@@ -96,9 +98,10 @@ export class CheckingRentingComponent {
   }
     let precio;
     console.log(diffAnios)
-
+    let idString = this.renting.id.toString();
     let annosString = diffAnios.toString();
-    this.shoppingService.PurchaseCar(this.car,this.username, annosString).subscribe({
+    console.log(idString)
+    this.shoppingService.PurchaseCar(this.car,idString,this.username, annosString).subscribe({
       next:(resp)=>{
           precio=resp.price;
           Swal.fire({

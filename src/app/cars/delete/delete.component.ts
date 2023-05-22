@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CarsService } from '../cars.service';
 import { cars } from '../../interfaces/cars.interface copy';
 import Swal from 'sweetalert2';
+import { ImagesService } from '../images.service';
 
 @Component({
   selector: 'app-delete',
@@ -16,7 +17,7 @@ export class DeleteComponent implements OnInit {
 
  //Implementamos el router, el servicio de coches, y el activatedRouter para recoger los parámetros
   constructor( private router:Router, 
-    private carService:CarsService,private route:ActivatedRoute) { }
+    private carService:CarsService,private route:ActivatedRoute,private imageService:ImagesService) { }
 
   ngOnInit(): void {
     const id =this.route.snapshot.params["id"] //Recogemos el id del coche
@@ -34,6 +35,30 @@ export class DeleteComponent implements OnInit {
         })
       }
     })
+  }
+  deleteImage(id:number){
+
+    Swal.fire({
+      title: '¿Seguro que quieres borrar la foto?',
+      showDenyButton: true,
+      confirmButtonText: 'Borrar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.imageService.deleteImages(id).subscribe({
+          next:(resp)=>{
+            window.location.reload();
+          },error:(e)=>{
+            alert("No se ha podido subir la imagen");
+          }
+        })
+      } else if (result.isDenied) {
+        Swal.fire('Cambios cancelados', '', 'info')
+      }
+    })
+    
+    
   }
 
   //Metodo para eliminar el coche
