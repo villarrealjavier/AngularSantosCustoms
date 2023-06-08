@@ -2,11 +2,13 @@
   margin-top: 10%;
   margin-right: 0;
 }
+
 /* Estilos para dispositivos móviles */
 @media only screen and (max-width: 767px) {
+  
   /* Ajustar el ancho de la tabla */
   .table-responsive {
-    width: 100%;
+    width: auto;
     overflow-x: auto;
   }
 
@@ -14,7 +16,7 @@
   .cart-product-imitation {
     height: 250px;
     width: 300px;
-    overflow: hidden;
+    overflow: auto;
   }
 
   /* Ajustar el tamaño de fuente del precio total */

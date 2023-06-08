@@ -15,10 +15,10 @@ import { Renting } from 'src/app/interfaces/renting.interface';
 export class RenovationCartComponent {
 
   car!:cars //Coche el cual vamos a hacerle el renting
-  username!:string
-  precioRenting!:number
-  precioRenting48!:number
-  renting!:Renting
+  username!:string //Username del usuario
+  precioRenting!:number //Precio del renting
+  precioRenting48!:number //Precio del renting en 48 meses
+  renting!:Renting //Renting
   jwt: string | null = null; // Token
    constructor(private route:ActivatedRoute, private carService:CarsService, private shoppingService:ShoppingService,private authService:AuthService,
      private router:Router){
@@ -34,20 +34,21 @@ export class RenovationCartComponent {
       this.username=this.authService.returnUser(this.jwt) //Devuelve el username a partir del token
     this.shoppingService.getRenting(id).subscribe({
       next: (resp)=>{
-        this.renting=resp;
-        this.car=resp.num_bastidor
-        this.precioRenting= Math.round((this.car.price/2)/24)
-        this.precioRenting48= Math.round((this.car.price/2)/48)
+        this.renting=resp; //Asignamos el renting
+        this.car=resp.num_bastidor //Asignamos el coche
+        this.precioRenting= Math.round((this.car.price/2)/24) //Asignamos un precio
+        this.precioRenting48= Math.round((this.car.price/2)/48) //Asignamos otro precio
       }
     })
   }
    }
 
+   //Metodo de aceptar el renting
    acceptRenting(plan:number){
-    let planString = plan.toString();
-    let idString = this.renting.id.toString()
-    console.log(plan)
-    this.shoppingService.updateRenting(idString,this.username,planString).subscribe({
+    let planString = plan.toString(); //Pasamos el plan a String para la peticion
+    let idString = this.renting.id.toString() //Pasamos el id a String para la peticion
+   
+    this.shoppingService.updateRenting(idString,this.username,planString).subscribe({ //Realizamos la peticion de realizar el renting
       next:(resp)=>{
         Swal.fire({
           icon: 'success',

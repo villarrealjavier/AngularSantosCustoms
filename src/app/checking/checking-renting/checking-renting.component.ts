@@ -15,11 +15,11 @@ import Swal from 'sweetalert2';
 })
 export class CheckingRentingComponent {
 
-  num_bastidor!:string
-  id!:string;
-  username!:string;
-  renting!:Renting
-  car!:cars
+  num_bastidor!:string //Numero de identificacion del coche
+  id!:string; //Id
+  username!:string; //Username del usuario
+  renting!:Renting // Renting
+  car!:cars //Coche
   constructor(private route:ActivatedRoute, private carService: CarsService, private checkingService:CheckingService, private shoppingService:ShoppingService,
     private router:Router){
 
@@ -33,8 +33,8 @@ export class CheckingRentingComponent {
       this.shoppingService.getRenting(this.id).subscribe({
         next:(resp)=>{
           this.car=resp.num_bastidor;
-          this.renting=resp;
-          console.log(this.renting,this.car)
+          this.renting=resp; //Asigamos el renting
+          
         }
       })
 
@@ -42,9 +42,10 @@ export class CheckingRentingComponent {
     })
   }
 
+  //Eliminamos un renting
   deleteRenting(){
     let idString= this.renting.id.toString()
-    this.checkingService.deleteRenting(idString).subscribe({
+    this.checkingService.deleteRenting(idString).subscribe({ //Llamamos al servicio para realizar la eliminacion del renting
       next:(resp)=>{
           Swal.fire({
             icon: 'success',
@@ -63,9 +64,10 @@ export class CheckingRentingComponent {
     })
   }
 
+  //Cambiar renting
   changeRenting(){
     let idString= this.renting.id.toString()
-    this.checkingService.deleteRenting(idString).subscribe({
+    this.checkingService.deleteRenting(idString).subscribe({ //Eliminamos el renting, mediante la llamada al servicio
       next:(resp)=>{
           Swal.fire({
             icon: 'success',
@@ -84,10 +86,11 @@ export class CheckingRentingComponent {
     })
   }
 
+  //Comprar vehículo actual
   purchaseVehicle(){
     
-    let fecha1 = new Date(this.renting.date_start);
-    var fecha2=new Date(this.renting.date_end);
+    let fecha1 = new Date(this.renting.date_start); //Recogemos la fecha de inicio
+    var fecha2=new Date(this.renting.date_end);//Recogemos la fecha de fin
 
     // Obtener los años y meses de diferencia
     var diffAnios = fecha2.getFullYear() - fecha1.getFullYear();
@@ -97,14 +100,14 @@ export class CheckingRentingComponent {
     diffAnios--;
   }
     let precio;
-    console.log(diffAnios)
-    let idString = this.renting.id.toString();
-    let annosString = diffAnios.toString();
-    console.log(idString)
-    this.shoppingService.PurchaseCar(this.car,idString,this.username, annosString).subscribe({
+   
+    let idString = this.renting.id.toString(); //Pasamos a String para poder realizar la peticion
+    let annosString = diffAnios.toString(); //Pasamos a String para poder realizar la peticion
+    
+    this.shoppingService.PurchaseCar(this.car,idString,this.username, annosString).subscribe({ //Mandamos la peticion la cual realizará la comrpa
       next:(resp)=>{
           precio=resp.price;
-          Swal.fire({
+          Swal.fire({ //Alerta de realizar la compra
             title: 'Seguro que quiere realizar la compra?',
             text: "El precio con el descuento por año es de:" + precio,
             icon: 'warning',
@@ -113,7 +116,7 @@ export class CheckingRentingComponent {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sí, comprar!'
           }).then((result) => {
-            if (result.isConfirmed) {
+            if (result.isConfirmed) { 
               this.router.navigate(['/cars/listCar']) //Redirigimos a la lista de coches
               Swal.fire(
                 'Gracias por su compra!',

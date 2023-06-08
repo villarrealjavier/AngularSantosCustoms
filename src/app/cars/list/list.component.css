@@ -18,25 +18,33 @@ th {
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 990px) {
   td, th {
+    margin-left: 6%;
     display: block;
     border: none;
-    text-align: left;
+    text-align: center;
+    align-items: center;
+  }
+  .buscador{
+    margin-right: 2%;
+    float: left;
   }
   
   td {
     border-bottom: 1px solid #dddddd;
     position: relative;
     text-align: center;
+    align-items: center;
   }
   
   td::before {
+    align-items: center;
     position: absolute;
     left: 0;
     top: 0;
     width: 50%;
-    padding-right: 10px;
+   
     white-space: nowrap;
     content: attr(data-label);
     float: left;

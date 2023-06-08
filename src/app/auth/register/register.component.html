@@ -95,7 +95,7 @@
                     
   
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="submit" class="btn btn-primary btn-lg" >Registrarse</button>
+                      <button type="submit" class="btn btn-primary btn-lg" [disabled]="registerForm.invalid">Registrarse</button>
                       &nbsp;&nbsp;
                     
                       <button type="button" class="btn btn-danger btn-lg"  [routerLink]="['/']" routerLinkActive="router-link-active"  >Volver</button>

@@ -41,8 +41,8 @@ export class AuthService {
   }),catchError(error=>{ // Si captamos algun error, ponemos el login a false, borramos el token y devolvemos mensaje de error
     Swal.fire({
       icon: 'error',
-      title: 'Oops...',
-      text: 'Something went wrong!',
+      title: 'Nombre de usuario o contraseña incorrectos',
+      text: 'Ha ocurrido un error al realizar el login!',
       
     })
     localStorage.setItem('loggin',"false");
@@ -53,7 +53,7 @@ export class AuthService {
   }
   //Metodo para registrarse
   register(username:string,password:string,email:string,name:string):Observable<boolean>{
-    console.log(username,password)
+    
     
     return this.http.post<any>(environment.urlApi+"sign_up/submit",{'username':username,'password':password,'email':email,'name':name}, this.httpOptions)
     .pipe(switchMap(resp=>{ //Realizamos la peticion
@@ -65,7 +65,7 @@ export class AuthService {
     Swal.fire({
       icon: 'error',
       title: 'Ha ocurrido un error al registrarse, prueba con otro correo o nombre de usuario',
-      text: 'Something went wrong!',
+      text: 'Ha ocurrido un error!',
     })
     
     

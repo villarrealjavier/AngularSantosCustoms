@@ -114,19 +114,24 @@ export class UpdateComponent implements OnInit {
  
 
   
-
+//Método para añadir las imágenes
   addImages(){
    
-    this.imageService.addImages(this.addImageForm.get('fileSource')?.value, this.json ).subscribe({
+    this.imageService.addImages(this.addImageForm.get('fileSource')?.value, this.json ).subscribe({ // Si la petición es correcta recargamos la página para ver el resultado
       next:(resp)=>{
-        window.location.reload();
-      },error:(e)=>{
-        alert("No se ha podido subir la imagen");
+        window.location.reload(); // Si la petición es correcta recargamos la página para ver el resultado
+      },error:(e)=>{// Si hay algún error, lanzamos mensaje
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Ha ocurrido un error al subir la imagen!',
+          footer: 'Selecciona una imagen de tipo: jpg, jpeg o png'
+        })
       }
     })
   }
-
-  deleteImage(id:number){
+//Método para eliminar una imágen
+  deleteImage(id:number){//Recogemos el id de la imagen
 
     Swal.fire({
       title: '¿Seguro que quieres borrar la foto?',
@@ -136,14 +141,14 @@ export class UpdateComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.imageService.deleteImages(id).subscribe({
+        this.imageService.deleteImages(id).subscribe({ //Si confirma eliminamos la imagen
           next:(resp)=>{
-            window.location.reload();
-          },error:(e)=>{
+            window.location.reload(); //Recargamos para ver el resultado
+          },error:(e)=>{ //Si hay error, lanzamos el mensaje
             alert("No se ha podido subir la imagen");
           }
         })
-      } else if (result.isDenied) {
+      } else if (result.isDenied) { //Si cancela informamos al usuario
         Swal.fire('Cambios cancelados', '', 'info')
       }
     })
@@ -210,9 +215,8 @@ export class UpdateComponent implements OnInit {
       });
     }
   }
+  //Método por si cambiamos la imagen
   onFileChangeImage(event:any) {
-   
-    
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.addImageForm.patchValue({

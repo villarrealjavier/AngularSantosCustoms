@@ -82,7 +82,15 @@ export class RegisterComponent implements OnInit {
             })
             
             
-          }}}})
+          }}},error:(e)=>{ //Si existe algun error, devolvemos el mensaje de error
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Ha ocurrido al tratar de registrar el usuario!',
+            })
+    
+          }
+        })
        }
   
 

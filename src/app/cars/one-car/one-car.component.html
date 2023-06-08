@@ -30,7 +30,7 @@
                 [showThumbnails]="false">
       
            <ng-template pTemplate="item" let-img>
-                  <img [routerLink]="['/cars/car', car.num_bastidor]" [src]="img.img"
+                  <img  (click)="deleteImage(img.id)" [src]="img.img"
                        style="width: 100%; 
                               display: block;" />
            </ng-template>
@@ -50,7 +50,7 @@
          
 <p-galleria *ngIf="car.listImages.length>3" [value]="car.listImages" [autoPlay]="true" [circular]="true"  [numVisible]="5"  [containerStyle]="{ 'max-width': '640px' }"> 
   <ng-template pTemplate="item" let-item>
-      <img [src]="item.img" style="width: 100%;" />
+      <img (click)="deleteImage(item.id)" [src]="item.img" style="width: 100%;" />
   </ng-template>
   <ng-template pTemplate="thumbnail" let-item>
       <div class="grid grid-nogutter justify-content-center">

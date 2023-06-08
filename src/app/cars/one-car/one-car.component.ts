@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class OneCarComponent {
   car!:cars
 
+  //Json que usaremos para las peticiones
   json: any = {
     num_bastidor:'',
     year: '',
@@ -27,18 +28,21 @@ export class OneCarComponent {
 
   };
 
+  //Formulario de imágenes, desde el que controlaremos las restricciones que apliquemos
   addImageForm: FormGroup = this.fb.group({
     files:['',[Validators.required]],
     fileSource:['',[Validators.required]] //Archivo el cual añadiremos en la peticion
   })
 
+  //Implementamos el activatedRoute, el formbuilder para los formularios, el imageService para las peticiones relacionadas 
+  //con las imágenes y el Servicio de coches para las peticiones relacionadas con los coches
   constructor(private route: ActivatedRoute, private service: CarsService,private fb:FormBuilder
     , private imageService:ImagesService){
 
   }
 
   ngOnInit(){
-    const id=this.route.snapshot.params["id"]
+    const id=this.route.snapshot.params["id"] //Recogemos el id del coche
     this.service.getCarsbyId(id).subscribe({
       next:(resp)=>{
         this.car=resp //Asignamos el coche a la variable
@@ -51,27 +55,37 @@ export class OneCarComponent {
           this.json.price=resp.price
           this.json.name_exemplary=resp.name_exemplary
       },error:(e)=>{
-        alert("No se ha podido obtener el coche")
+        Swal.fire({  // Si hay error mostramos mensaje de error
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Ha ocurrido un error al recuperar el vehículo!',
+          footer: 'Vuelve a la página de inicio!'
+        })
       }
     })
 
 
   }
 
+  //Método para añadir las imágenes
   addImages(){
-   
     this.imageService.addImages(this.addImageForm.get('fileSource')?.value, this.json ).subscribe({
       next:(resp)=>{
-        window.location.reload();
-      },error:(e)=>{
-        alert("No se ha podido subir la imagen");
+        window.location.reload(); // Si la petición es correcta recargamos la página para ver el resultado
+      },error:(e)=>{ // Si hay algún error, lanzamos mensaje
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Ha ocurrido un error al subir la imagen!',
+          footer: 'Selecciona una imagen de tipo: jpg, jpeg o png'
+        })
+      
       }
     })
   }
 
+  //Método por si cambiamos la imagen
   onFileChangeImage(event:any) {
-   
-    
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.addImageForm.patchValue({
@@ -80,26 +94,30 @@ export class OneCarComponent {
     }
   }
 
-  deleteImage(id:number){
-
+  //Método para eliminar una imágen
+  deleteImage(id:number){ //Recogemos el id de la imagen
     Swal.fire({
       title: '¿Seguro que quieres borrar la foto?',
       showDenyButton: true,
-      showCancelButton: true,
       confirmButtonText: 'Borrar',
       denyButtonText: `Cancelar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.imageService.deleteImages(id).subscribe({
+        this.imageService.deleteImages(id).subscribe({ //Si confirma, eliminamos la imagen
           next:(resp)=>{
-            window.location.reload();
-          },error:(e)=>{
-            alert("No se ha podido subir la imagen");
+            window.location.reload(); //Recargamos para ver el resultado
+          },error:(e)=>{  // Si hay algún error, lanzamos mensaje
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Ha ocurrido un error al eliminar la imagen!',
+              footer: 'Intentalo de nuevo!'
+            })
           }
         })
-      } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info')
+      } else if (result.isDenied) { //Si cancela, informamos al usuario
+        Swal.fire('Cambios Cancelados', '', 'info')
       }
     })
     
