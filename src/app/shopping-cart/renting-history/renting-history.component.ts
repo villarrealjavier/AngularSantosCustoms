@@ -13,7 +13,7 @@ import { ShoppingService } from '../services/shopping.service';
 export class RentingHistoryComponent {
 
   user!:user //Usuario
-  listRenting:Renting[]=[];
+  listRenting:Renting[]=[]; //Lista de renting
   
 
   constructor(private service:UsersService, private route:ActivatedRoute ,private router:Router, private shoppingService:ShoppingService){
