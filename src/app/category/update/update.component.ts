@@ -54,8 +54,8 @@ export class UpdateComponent implements OnInit {
         }else { //Si por el contrario no obtenemos respuesta, mandamos mensaje de error
           Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'No tienes permisos!',
+            title: 'Algo falló, revise los campos!',
+            text: 'Algo ha fallado al actualizar!',
            
           })
           

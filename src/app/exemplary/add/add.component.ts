@@ -18,6 +18,7 @@ export class AddComponent {
   constructor(private fb: FormBuilder, private router:Router, private brandService:BrandService, private exemplaryService:ExemplaryService ) { }
 
   brand!:brand //Marca
+  name_brand!:string
   brands:brand[]=[] //Lista de marcas
   opcionSeleccionado: string  = '0'; // Opcion seleccionada
   verSeleccion: string        = ''; //Valor seleccionado
@@ -26,10 +27,22 @@ export class AddComponent {
   ngOnInit(): void {
     this.getBrands() //Obtenemos las marcas
   }
+  //Formulario reactivo el cual posee las restricciones para cada campo
+  myForm: FormGroup = this.fb.group({
+    name_exemplary:['',[Validators.required, Validators.minLength(2)]],
+    name_brand:['',[Validators.required, Validators.minLength(3)]],
+  })
 
-  @ViewChild('formLogin') formLogin!: NgForm //Formulario de tipo template
+   //Validacion para los campos
+   isValidField(field:string){
+    return this.myForm?.controls[field].errors //Se comprueba si tiene errores, si es inválido y si han sido modificados
+    && this.myForm?.controls[field].invalid && this.myForm.controls[field].touched
+  }
+
+  //@ViewChild('formLogin') formLogin!: NgForm //Formulario de tipo template
 
   //Validador del nombre del modelo
+  /*
   validateExemplary(): boolean{
     //Asignamos el valor a una variable que mas tarde usaremos
     this.name_exemplary = this.formLogin?.controls['name_exemplary'].value;
@@ -37,14 +50,17 @@ export class AddComponent {
     return this.formLogin?.controls['name_exemplary'].invalid //Comprobamos si es inválido o si esta modificado
     && this.formLogin?.controls['name_exemplary'].touched;
 
-  }
+  }*/
 
   
  
   //Método para guardar un modelo
   saveExemplary(){
-    this.brandService.getBrandbyId(this.verSeleccion).subscribe({ //Realiza la peticion llamando al servicio, y busca la marca por id
-      next:(resp=>{
+    this.name_exemplary=this.myForm.get('name_exemplary')?.value
+    this.name_brand=this.myForm.get('name_brand')?.value
+    this.brandService.getBrandbyId(this.name_brand).subscribe({ //Realiza la peticion llamando al servicio, y busca la marca por id
+      next:(resp)=>{
+        console.log(resp)
         this.brand=resp //Asigna la marca a una variable
         return this.exemplaryService.saveExemplary(this.name_exemplary,this.brand).subscribe({ // Realiza la peticion para guardar el modelo llamando al servicio
           next:(resp)=>{
@@ -67,7 +83,15 @@ export class AddComponent {
             })
           }
         })
-      })
+      },
+      error: (e)=>{ //Si obtenemos un error, lanzamos mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error, por favor revisa los campos.',
+          text: 'Revisa los campos del modelo introducido!',
+          footer: 'Ha ocurrido un error!'
+        })
+      }
     })
     
 

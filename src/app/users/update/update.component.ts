@@ -5,6 +5,7 @@ import { user } from 'src/app/interfaces/user.interface';
 import { UsersService } from '../services/users.service';
 import { AuthService } from '../../auth/auth.service';
 import { ImagesService } from 'src/app/cars/images.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update',
@@ -134,9 +135,17 @@ export class UpdateComponent {
 
    
     this.service.updateUser(this.json,this.myForm.get('fileSource')?.value,this.user.username).subscribe({ //Realiza la peticion llamando al servicio y recarga la página
-      next:(resp=>{
+      next:(resp)=>{
         window.location.reload()
-      })
+      },
+      error: (e)=>{ //Si obtenemos un error, lanzamos mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Revise los campos.',
+          text: 'Recuerda escribir campos válidos!',
+          footer: 'Ha ocurrido un error'
+        })
+      }
     })
     this.myForm.reset() //Resetea el formulario
     

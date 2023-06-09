@@ -10,15 +10,14 @@
   
                   <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Actualizar Modelo:</p>
   
-                  <form (ngSubmit)="updateExemplary()"  #formLogin="ngForm"  class="mx-1 mx-md-4">
+                  <form (ngSubmit)="updateExemplary()"  [formGroup]="myForm"  class="mx-1 mx-md-4">
   
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                           <label class="form-label" for="form3Example1c">Nombre del modelo: </label>
                         <input type="text" id="name_exemplary"  aria-label="name_exemplary"
-                        name="name_exemplary"
-                        [(ngModel)]="name_exemplary"  
+                        name="name_exemplary" [value]="name_exemplary"  
                         class="form-control" 
                         
                         readonly/>
@@ -30,7 +29,7 @@
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                           <label class="form-label" for="form3Example1c">Marca: </label>
-                          <select  name="opcionSeleccionado" aria-label="select" [(ngModel)]="opcionSeleccionado" (change)="capturar()" required="required" class="form-control">
+                          <select  name="opcionSeleccionado" aria-label="select" formControlName="name_brand" (change)="capturar()" required="required" class="form-control">
                             
                             <option *ngFor="let brand of brands" [value]="brand.name_brand" checked>
                                 {{brand.name_brand}}
@@ -49,7 +48,7 @@
                     
   
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="submit" class="btn btn-primary btn-lg" [disabled]="formLogin.invalid" >Actualizar Modelo</button>
+                      <button type="submit" class="btn btn-primary btn-lg" [disabled]="myForm.invalid" >Actualizar Modelo</button>
                       &nbsp;&nbsp;
                     
                       <button type="button" class="btn btn-danger btn-lg"  [routerLink]="['/exemplary/listExemplary']" routerLinkActive="router-link-active"  >Volver</button>

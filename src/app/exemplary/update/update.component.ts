@@ -4,7 +4,7 @@ import { brand } from '../../interfaces/brand.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExemplaryService } from '../services/exemplary.service';
 import Swal from 'sweetalert2';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-update',
@@ -15,6 +15,7 @@ import { NgForm } from '@angular/forms';
 export class UpdateComponent {
   @ViewChild('formLogin') formLogin!: NgForm //Formulario de tipo template
 
+  name_brand!:string
   brands:brand[]=[] //Listado de marcas
   name_exemplary!:string; //Nombre del modelo
   brand!:brand //Marca
@@ -22,7 +23,7 @@ export class UpdateComponent {
   verSeleccion: string        = ''; // Valor de la seleccion
 
   //Implementamos servicio de las marcas, ActivatedRouter, servicio de modelos y Router
-  constructor(private brandService:BrandService, private route:ActivatedRoute, private exemplaryService:ExemplaryService,private router:Router){
+  constructor(private fb: FormBuilder,private brandService:BrandService, private route:ActivatedRoute, private exemplaryService:ExemplaryService,private router:Router){
 
   }
   ngOnInit(){
@@ -32,6 +33,27 @@ export class UpdateComponent {
     
 
   }
+   //Formulario reactivo el cual posee las restricciones para cada campo
+   myForm: FormGroup = this.fb.group({
+    name_brand:['',[Validators.required, Validators.minLength(3)]],
+  })
+
+   //Validacion para los campos
+   isValidField(field:string){
+    return this.myForm?.controls[field].errors //Se comprueba si tiene errores, si es inválido y si han sido modificados
+    && this.myForm?.controls[field].invalid && this.myForm.controls[field].touched
+  }
+
+   //Validador del nombre del modelo
+   /*
+   validateExemplary(): boolean{
+    //Asignamos el valor a una variable que mas tarde usaremos
+    this.name_exemplary = this.formLogin?.controls['name_exemplary'].value;
+    
+    return this.formLogin?.controls['name_exemplary'].invalid //Comprobamos si es inválido o si esta modificado
+    && this.formLogin?.controls['name_exemplary'].touched;
+
+  }*/
 
   //Métodos para obtener las marcas y las asignamos a la lista
   getBrands(){
@@ -46,7 +68,8 @@ export class UpdateComponent {
 
   //Método para actualizar un modelo
   updateExemplary(){
-    this.brandService.getBrandbyId(this.verSeleccion).subscribe({ //Realizamos la peticion llamando al servicio para obtener una marca mediante su id
+    this.name_brand=this.myForm.get('name_brand')?.value
+    this.brandService.getBrandbyId(this.name_brand).subscribe({ //Realizamos la peticion llamando al servicio para obtener una marca mediante su id
       next:(resp=>{
         this.brand=resp //Asignamos la marca a la variaable
         return this.exemplaryService.updateExemplary(this.name_exemplary,this.brand).subscribe({ //Realizamos la peticion de actualizar el modelo llamando al servicio

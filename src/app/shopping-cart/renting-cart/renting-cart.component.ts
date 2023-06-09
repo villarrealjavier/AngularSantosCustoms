@@ -26,6 +26,7 @@ export class RentingCartComponent {
   ngOnInit(){
     this.jwt = localStorage.getItem('Authorization'); //Obtenemos el token
     const id =this.route.snapshot.params["id"] //Recogemos el identificador del coche
+    console.log(id)
     if(this.jwt){
       this.username=this.authService.returnUser(this.jwt) //Devuelve el username a partir del token
       this.carService.getCarsbyId(id).subscribe({ //Buscamos el coche mediante su identificador
