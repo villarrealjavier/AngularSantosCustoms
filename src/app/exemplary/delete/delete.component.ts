@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { brand } from '../../interfaces/brand.interface';
 import { BrandService } from '../../category/list/Brandservices.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExemplaryService } from '../services/exemplary.service';
-import { exemplary } from '../../interfaces/exemplary.interface';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,7 +17,7 @@ export class DeleteComponent {
 
 
   //Implementamos el servicio de marca, activatedRouter para recoger los parámetros, y el servicio de modelos, y router
-  constructor(private brandService:BrandService, private route:ActivatedRoute, private exemplaryService:ExemplaryService,private router:Router){
+  constructor( private route:ActivatedRoute, private exemplaryService:ExemplaryService,private router:Router){
 
   }
   ngOnInit(){

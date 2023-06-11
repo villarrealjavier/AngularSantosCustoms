@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { UsersService } from 'src/app/users/services/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
 import { user } from 'src/app/interfaces/user.interface';
 import { ShoppingService } from '../services/shopping.service';
 import { Purchase } from '../../interfaces/Purchase.interface';

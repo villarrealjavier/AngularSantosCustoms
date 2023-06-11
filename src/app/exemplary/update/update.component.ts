@@ -44,17 +44,6 @@ export class UpdateComponent {
     && this.myForm?.controls[field].invalid && this.myForm.controls[field].touched
   }
 
-   //Validador del nombre del modelo
-   /*
-   validateExemplary(): boolean{
-    //Asignamos el valor a una variable que mas tarde usaremos
-    this.name_exemplary = this.formLogin?.controls['name_exemplary'].value;
-    
-    return this.formLogin?.controls['name_exemplary'].invalid //Comprobamos si es inválido o si esta modificado
-    && this.formLogin?.controls['name_exemplary'].touched;
-
-  }*/
-
   //Métodos para obtener las marcas y las asignamos a la lista
   getBrands(){
 
