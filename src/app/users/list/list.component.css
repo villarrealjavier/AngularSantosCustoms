@@ -46,4 +46,7 @@ th {
     font-weight: bold;
     text-transform: uppercase;
   }
+  .img{
+    width: 200px;
+  }
 }
