@@ -72,7 +72,7 @@ export class CheckingRentingComponent {
       next:(resp)=>{
           Swal.fire({
             icon: 'success',
-            title: 'Renting Eliminado, escoja nuevo renting!',
+            title: 'El renting actual, está suspendido, elija nuevo coche!',
             text: 'Estas de vuelta en el listado para elegir nuevo Renting!',
         });
         this.router.navigate(['/cars/listCar']) //Redirigimos a la lista de coches
@@ -88,7 +88,7 @@ export class CheckingRentingComponent {
   }
 
   //Comprar vehículo actual
-  purchaseVehicle(){
+ /* purchaseVehicle(){
     
     let fecha1 = new Date(this.renting.date_start); //Recogemos la fecha de inicio
     var fecha2=new Date(this.renting.date_end);//Recogemos la fecha de fin
@@ -104,6 +104,11 @@ export class CheckingRentingComponent {
    
     let idString = this.renting.id.toString(); //Pasamos a String para poder realizar la peticion
     let annosString = diffAnios.toString(); //Pasamos a String para poder realizar la peticion
+
+
+
+
+
     
     this.shoppingService.PurchaseCar(this.car,idString,this.username, annosString).subscribe({ //Mandamos la peticion la cual realizará la comrpa
       next:(resp)=>{
@@ -137,6 +142,66 @@ export class CheckingRentingComponent {
         })
       }
     })
+  }*/
+  
+
+  //_-------------------------------------------
+  purchaseVehicle(){
+    
+    let fecha1 = new Date(this.renting.date_start); //Recogemos la fecha de inicio
+    var fecha2=new Date(this.renting.date_end);//Recogemos la fecha de fin
+
+    // Obtener los años y meses de diferencia
+    var diffAnios = fecha2.getFullYear() - fecha1.getFullYear();
+
+  // Verificar si la fecha final es anterior a la fecha inicial en el mismo mes y día
+  if (fecha2 < new Date(fecha1.getFullYear() + diffAnios, fecha1.getMonth(), fecha1.getDate())) {
+    diffAnios--;
+  }
+    let precio;
+   
+    let idString = this.renting.id.toString(); //Pasamos a String para poder realizar la peticion
+    let annosString = diffAnios.toString(); //Pasamos a String para poder realizar la peticion
+  let decuentoAMostrar=this.car.price*(diffAnios*0.10)
+  let precioAMostrar= this.car.price-decuentoAMostrar;
+    
+
+
+
+    Swal.fire({ //Alerta de realizar la compra
+      title: 'Seguro que quiere realizar la compra?',
+      text: "El precio con el descuento por año aplicado es de: " + decuentoAMostrar+"€" + " , en total serían " + precioAMostrar+"€" ,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, comprar!'
+    }).then((result) => {
+      if (result.isConfirmed) { 
+        this.shoppingService.PurchaseCar(this.car,idString,this.username, annosString).subscribe({ //Mandamos la peticion la cual realizará la comrpa
+          next:(resp)=>{
+              precio=resp.price;
+              this.router.navigate(['/cars/listCar']) //Redirigimos a la lista de coches
+              Swal.fire(
+              'Gracias por su compra!',
+              'Recibirá su coche en unos dias.',
+              'success'
+               )
+              
+    
+           
+          },error:(e)=>{ //Si hay algun error, lanzamos un mensaje de error
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'No se ha podido realizar la compra!',
+              footer: 'Pruebe en otro momento'
+            })
+          }
+        })
+      }
+    })
+    
   }
  
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, of, switchMap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import Swal from 'sweetalert2';
 import jwt_decode from 'jwt-decode';
 import { user } from '../interfaces/user.interface';

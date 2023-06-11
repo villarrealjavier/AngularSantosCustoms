@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { brand } from 'src/app/interfaces/brand.interface';
 import { Observable, switchMap, of, catchError } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import Swal from 'sweetalert2';
 
 @Injectable({
