@@ -51,4 +51,14 @@ th {
     font-weight: bold;
     text-transform: uppercase;
   }
+  .p-button {
+    color: #fff;
+    background: #14B8A6;
+    border: 1px solid #14B8A6;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: background-color .2s,color .2s,border-color .2s,box-shadow .2s;
+    border-radius: 6px;
+    width: 70px;
+}
 }
