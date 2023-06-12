@@ -22,7 +22,7 @@ export class RentingHistoryComponent {
 
   ngOnInit(){
     const id = this.route.snapshot.params["id"] //Recogemos el id de los parámetros
-    console.log(id);
+    
     this.shoppingService.getRentingByUser(id).subscribe( {
     next:(resp)=>{
       this.listRenting=resp;
