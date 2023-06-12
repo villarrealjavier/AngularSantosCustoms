@@ -38,11 +38,11 @@
             <td >{{exemplary.name_exemplary}}</td>
             <td >{{exemplary.name_brand.name_brand}}</td>
             <td *ngIf="role=='ADMIN'">
-                <a href="#" [routerLink]="['/exemplary/updateExemplary',exemplary.name_exemplary]" class="btn btn-warning">Actualizar Modelo</a>
+                <a href="#" [routerLink]="['/exemplary/updateExemplary',exemplary.name_exemplary]" class="btn btn-warning actualizar">Actualizar Modelo</a>
                 &nbsp;&nbsp;
         
               
-                <a  [routerLink]="['/exemplary/deleteExemplary',exemplary.name_exemplary]" class="btn btn-danger">Eliminar Modelo</a>
+                <a  [routerLink]="['/exemplary/deleteExemplary',exemplary.name_exemplary]" class="btn btn-danger actualizar">Eliminar Modelo</a>
 
             </td>
                 
