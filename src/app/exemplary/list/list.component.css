@@ -34,5 +34,10 @@
   .actualizar{
     margin-top: 1em;
   }
-
+  .p-datatable .p-datatable-tbody>tr>td {
+    text-align: center;
+    border: 1px solid #dee2e6;
+    border-width: 0 0 1px 0;
+    padding: 1rem;
+}
 }
