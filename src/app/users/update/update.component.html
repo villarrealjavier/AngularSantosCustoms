@@ -64,7 +64,7 @@
                 <div class="col-sm-9">
                     <input class="form-control" type="email" name="email"  aria-label="email"id="email" formControlName="email" placeholder="{{user.email}}">
                     <span class="form-text text-danger" *ngIf="isValidField('email')">
-                      El nombre debe tener más de 3 caracteres
+                      Debes introducir un emailm válido
                   </span>
                 </div>
               </div>
@@ -76,7 +76,7 @@
                 <div class="col-sm-9">
                     <input class="form-control" type="password" name="password"  aria-label="password" formControlName="password" id="password" placeholder="********">
                     <span class="form-text text-danger" *ngIf="isValidField('password')">
-                      El nombre debe tener más de 3 caracteres
+                      La contraseña debe tener más de 8 caracteres
                   </span>
                 </div>
                 
