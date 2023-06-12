@@ -69,7 +69,7 @@ getRenting(id:string):Observable<Renting>{
 
  //Método que realiza la peticion para grabar la compra
  PurchaseCar(car:cars, id:string, username:string, diffAnnos:string):Observable<cars>{
-  console.log(car, id,username,diffAnnos)
+  
   const formData = new FormData(); //Creamos un formulario
   formData.append('numbers_bast', new Blob([JSON.stringify(car)], {type: 'application/json'}), 'numbers_bast'); //Añadimos la lista de coches
   formData.append('username', username); //Añadimos el username al formulario
