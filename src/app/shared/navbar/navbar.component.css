@@ -1,14 +1,5 @@
 .cart-icon .cart-item-count {
     animation: bounce 0.5s;
   }
-  @media (max-width: 990px) {
-    .navbar-toggler .navbar-toggler-icon {
-      color: white;
-    }
-    
-  }
 
-  .navbar-toggler .navbar-toggler-icon {
-    color: white;
-  }
   
