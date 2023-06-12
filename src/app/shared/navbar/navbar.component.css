@@ -1,5 +1,10 @@
 .cart-icon .cart-item-count {
     animation: bounce 0.5s;
   }
+  @media (max-width: 990px) {
+    .nav-item{
+      margin-left: 2em;
 
+    }
+  }
   
