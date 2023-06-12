@@ -6,8 +6,7 @@ import { ExemplaryService } from '../services/exemplary.service';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styles: [
-  ]
+  styleUrls: ['./list.component.css']
 })
 export class ListComponent {
 

@@ -1,0 +1,30 @@
+@media (max-width: 600px) {
+    td, th {
+      display: block;
+      border: none;
+      text-align: left;
+    }
+    
+    td {
+      border-bottom: 1px solid #dddddd;
+      position: relative;
+      text-align: center;
+    }
+    
+    td::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50%;
+      padding-right: 10px;
+      white-space: nowrap;
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .img{
+      width: 150px;
+      height: 150px;
+    }
+  }
