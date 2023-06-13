@@ -35,13 +35,13 @@
       <ng-template pTemplate="header">
        
           <tr>
-            <th pSortableColumn="img">Imagen</th>
-            <th pSortableColumn="brand">Marca <p-sortIcon field="brand"></p-sortIcon></th>
-            <th pSortableColumn="model">Modelo <p-sortIcon field="model"></p-sortIcon></th>
-            <th pSortableColumn="price">Precio</th>
-            <th pSortableColumn="color">Color</th>
-            <th pSortableColumn="cubic_cent">Centimetros Cúbicos</th>
-            <th pSortableColumn="hp">Potencia</th>
+            <th class="text-center" pSortableColumn="img">Imagen</th>
+            <th class="text-center" pSortableColumn="brand">Marca <p-sortIcon field="brand"></p-sortIcon></th>
+            <th class="text-center" pSortableColumn="model">Modelo <p-sortIcon field="model"></p-sortIcon></th>
+            <th class="text-center" pSortableColumn="price">Precio</th>
+            <th class="text-center" pSortableColumn="color">Color</th>
+            <th class="text-center" pSortableColumn="cubic_cent">Centimetros Cúbicos</th>
+            <th class="text-center" pSortableColumn="hp">Potencia</th>
         
             <th *ngIf="role=='ADMIN'">Administrador</th>
           </tr>
@@ -80,22 +80,22 @@
               <!--<img src="{{car.listImages[0].img}}" width="250px" height="160px">-->
               
             </td>
-            <td >{{car.name_exemplary.name_brand.name_brand}}</td>
-            <td >{{car.name_exemplary.name_exemplary}}</td>
-            <td >{{car.price}}</td>
-            <td >{{car.color}}</td>
-            <td >{{car.cubic_cent}}</td>
-            <td>{{car.hp}}</td>
+            <td class="text-center" >{{car.name_exemplary.name_brand.name_brand}}</td>
+            <td class="text-center" >{{car.name_exemplary.name_exemplary}}</td>
+            <td class="text-center"  >{{car.price}}</td>
+            <td class="text-center" >{{car.color}}</td>
+            <td class="text-center" >{{car.cubic_cent}}</td>
+            <td class="text-center" >{{car.hp}}</td>
            
             
            
-            <td *ngIf="role=='USER' && car.sold!=true">
+            <td class="text-center" *ngIf="role=='USER' && car.sold!=true">
             <button class=" mt-2" pButton icon="pi pi-trash" (click)="addShoppingCart(car)" arial-label="Añadir al carrito">Añadir al carrito</button><br>
             <button class=" mt-2 btn btn-primary" pButton icon="pi pi-trash" arial-label="Realizar Renting" [routerLink]="['/shoppingCart/renting', car.num_bastidor]">Realizar Renting</button>
             <td *ngIf="role=='USER' && car.sold==true">
               <b>Vendido!</b> <img class="mb-2 ms-2"  alt="vendido" src="https://res.cloudinary.com/dpatneiyg/image/upload/v1678107201/Proyecto_JAVIERVILLARREAL/IMAGENES%20COCHES%20BASE%20DE%20DATOS/vendido_flx00j.png" width="50px" height="40px">
         </td>
-              <td *ngIf="role=='ADMIN'">
+              <td class="text-center"  *ngIf="role=='ADMIN'">
             <button  pButton icon="pi pi-pencil" [routerLink]="['/cars/updateCar', car.num_bastidor]" routerLinkActive="router-link-active" arial-label="Editar" >Editar</button>&nbsp;&nbsp;
             <button class="botonRojo mt-2" pButton icon="pi pi-trash" [routerLink]="['/cars/deleteCar', car.num_bastidor]" arial-label="Borrar">Borrar</button>
           </td>
