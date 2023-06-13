@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarsService } from '../cars.service';
 import { cars } from '../../interfaces/cars.interface copy';
 import { ShoppingService } from '../../shopping-cart/services/shopping.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -80,6 +81,11 @@ export class ListComponent implements OnInit {
     if(encontrado==false){ //Si por el contrario no lo hay, añadimos el coche al carrito y actualizamos la lista del sessionStorage
       this.shoppingService.shoppingCart.push(car)
       window.sessionStorage.setItem('carrito', JSON.stringify(this.shoppingService.shoppingCart));
+      Swal.fire({
+        icon: 'success',
+        title: 'Vehículo añadido al carrito',
+        text: 'Su producto se encuentra en el carrito!',
+    });
       
 
 
