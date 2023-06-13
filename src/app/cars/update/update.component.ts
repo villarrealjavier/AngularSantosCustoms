@@ -20,6 +20,9 @@ export class UpdateComponent implements OnInit {
   exemplaries:exemplary[]= [] // Lista de modelos las cuales vamos a mostrar
   opcionSeleccionado: string  = '0'; // Opcion seleccionada en el desplegable por defecto
   verSeleccion: string        = ''; // Seleccion escogida (Valor)
+  file!: File | null;
+
+  mimeTypesAllowed: string[] = ['image/jpeg', 'image/jpg', 'image/png', 'image/svg', 'image/webp'];
 
 //Json utilizado para actualizar un coche
   json: any = {
@@ -224,6 +227,35 @@ export class UpdateComponent implements OnInit {
       });
     }
   }
+
+  onFileChangeImagess(event:any) {
+
+    if (event.target.files.length > 0) {
+      this.file = event.target.files[0];
+      if(this.file!.size > 1048576) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Wow, an error has occurred',
+          text: 'Images larger than 1 mb are not allowed'
+        })
+        // this.file=null
+
+  }else if(!this.mimeTypesAllowed.includes(this.file?.type!)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Wow, an error has occurred',
+      text: 'The mimetype are not allowed'
+    })
+    // this.file = null;
+  }else {
+    this.addImageForm.patchValue({
+      fileSource: this.file
+    })
+
+  } 
+
+ }
+}
 
   
 
