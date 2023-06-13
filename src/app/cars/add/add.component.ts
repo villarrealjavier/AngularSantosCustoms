@@ -19,6 +19,9 @@ export class AddComponent implements OnInit {
   exemplaries:exemplary[]= [] // Lista de modelos las cuales vamos a mostrar
   opcionSeleccionado: string  = '0'; // Opcion seleccionada en el desplegable por defecto
   verSeleccion: string        = ''; // Seleccion escogida (Valor)
+  file!: File | null;
+
+  mimeTypesAllowed: string[] = ['image/jpeg', 'image/jpg', 'image/png', 'image/svg', 'image/webp'];
 
   //Implementamos Servicio de modelos, router, servicio de coches, formbuilder para la validacion
   constructor(private exemplaryService:ExemplaryService, private router:Router, 
@@ -145,6 +148,36 @@ onFileChange(event:any) {
       fileSource: file
     });
   }
+}
+
+//Método por si cambiamos la imagen
+onFileChangeImages(event:any) {
+
+  if (event.target.files.length > 0) {
+    this.file = event.target.files[0];
+    if(this.file!.size > 1048576) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Ha ocurrido un error',
+        text: 'No soporta imágenes de más de 1mb'
+      })
+      // this.file=null
+
+}else if(!this.mimeTypesAllowed.includes(this.file?.type!)) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Ha ocurrido un error',
+    text: 'El tipo elegido no es soportado'
+  })
+  // this.file = null;
+}else {
+  this.addCarForm.patchValue({
+    fileSource: this.file
+  })
+
+} 
+
+}
 }
 
 

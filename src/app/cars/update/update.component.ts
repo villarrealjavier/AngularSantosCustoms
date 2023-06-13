@@ -219,6 +219,7 @@ export class UpdateComponent implements OnInit {
     }
   }
   //Método por si cambiamos la imagen
+  /*
   onFileChangeImage(event:any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -226,25 +227,25 @@ export class UpdateComponent implements OnInit {
         fileSource: file
       });
     }
-  }
-
-  onFileChangeImagess(event:any) {
+  }*/
+//Método por si cambiamos la imagen
+  onFileChangeImages(event:any) {
 
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
       if(this.file!.size > 1048576) {
         Swal.fire({
           icon: 'error',
-          title: 'Wow, an error has occurred',
-          text: 'Images larger than 1 mb are not allowed'
+          title: 'Ha ocurrido un error',
+          text: 'No soporta imágenes de más de 1mb'
         })
         // this.file=null
 
   }else if(!this.mimeTypesAllowed.includes(this.file?.type!)) {
     Swal.fire({
       icon: 'error',
-      title: 'Wow, an error has occurred',
-      text: 'The mimetype are not allowed'
+      title: 'Ha ocurrido un error',
+      text: 'El tipo elegido no es soportado'
     })
     // this.file = null;
   }else {
