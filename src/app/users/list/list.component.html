@@ -37,7 +37,7 @@
            
             <td class="text-center"> 
               
-              <div class="form-check form-switch" *ngIf="userActual.username!=user.username">
+              <div class="form-check form-switch text-center" *ngIf="userActual.username!=user.username">
                 
                 <input class="form-check-input" *ngIf="user.role=='ADMIN'" checked (click)="changeRol('USER',user.username)" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                 <input class="form-check-input" *ngIf="user.role=='USER'"  (click)="changeRol('ADMIN',user.username)" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
