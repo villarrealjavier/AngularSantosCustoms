@@ -15,6 +15,10 @@ import Swal from 'sweetalert2';
 export class OneCarComponent {
   car!:cars
 
+  file!: File | null;
+
+  mimeTypesAllowed: string[] = ['image/jpeg', 'image/jpg', 'image/png', 'image/svg', 'image/webp'];
+
   //Json que usaremos para las peticiones
   json: any = {
     num_bastidor:'',
@@ -85,6 +89,7 @@ export class OneCarComponent {
   }
 
   //Método por si cambiamos la imagen
+  /*
   onFileChangeImage(event:any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -92,7 +97,39 @@ export class OneCarComponent {
         fileSource: file
       });
     }
-  }
+  }*/
+
+  //Método por si cambiamos la imagen
+onFileChangeImages(event:any) {
+
+  if (event.target.files.length > 0) {
+    this.file = event.target.files[0];
+    if(this.file!.size > 1048576) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Ha ocurrido un error',
+        text: 'No soporta imágenes de más de 1mb'
+      })
+      // this.file=null
+
+}else if(!this.mimeTypesAllowed.includes(this.file?.type!)) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Ha ocurrido un error',
+    text: 'El tipo elegido no es soportado'
+  })
+  // this.file = null;
+}else {
+  this.addImageForm.patchValue({
+    fileSource: this.file
+  })
+
+} 
+
+}
+}
+
+
 
   //Método para eliminar una imágen
   deleteImage(id:number){ //Recogemos el id de la imagen

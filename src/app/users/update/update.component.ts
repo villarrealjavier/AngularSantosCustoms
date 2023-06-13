@@ -19,6 +19,9 @@ export class UpdateComponent {
   user!:user //Usuario
   username!:string //Nombre de usuario
   jwt: string | null = null; // Token
+  file!: File | null;
+
+  mimeTypesAllowed: string[] = ['image/jpeg', 'image/jpg', 'image/png', 'image/svg', 'image/webp'];
 
 //Implementamos el servcio de usuario, activatedRouter, formbuilder, authService y router
   constructor(private service:UsersService, private route:ActivatedRoute,private fb:FormBuilder, private authService:AuthService, private router:Router
@@ -81,6 +84,7 @@ export class UpdateComponent {
   })
 
   //Método para que cambie el archivo cada vez que se cambie el archivo introducido
+  /*
   onFileChangeImage(event:any) {  
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -88,7 +92,39 @@ export class UpdateComponent {
         fileSource: file
       });
     }
-  }
+  }*/
+
+  //Método por si cambiamos la imagen
+onFileChangeImages(event:any) {
+
+  if (event.target.files.length > 0) {
+    this.file = event.target.files[0];
+    if(this.file!.size > 1048576) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Ha ocurrido un error',
+        text: 'No soporta imágenes de más de 1mb'
+      })
+      // this.file=null
+
+}else if(!this.mimeTypesAllowed.includes(this.file?.type!)) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Ha ocurrido un error',
+    text: 'El tipo elegido no es soportado'
+  })
+  // this.file = null;
+}else {
+  this.addImageForm.patchValue({
+    fileSource: this.file
+  })
+
+} 
+
+}
+}
+
+  
 
   addImages(){
     this.service.updateUserImage(this.addImageForm.get('fileSource')?.value, this.json).subscribe({

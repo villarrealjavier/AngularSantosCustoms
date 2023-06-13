@@ -138,7 +138,7 @@ addCar(){
  
 
 }
-
+/*
 onFileChange(event:any) {
    
     
@@ -148,7 +148,7 @@ onFileChange(event:any) {
       fileSource: file
     });
   }
-}
+}*/
 
 //Método por si cambiamos la imagen
 onFileChangeImages(event:any) {
