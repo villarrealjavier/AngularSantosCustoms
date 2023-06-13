@@ -20,22 +20,22 @@
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,15,20]">
       <ng-template pTemplate="header">
           <tr>
-            <th pSortableColumn="img">Avatar</th>
-            <th pSortableColumn="username">Username </th>
-            <th pSortableColumn="email">Email </th>
-            <th pSortableColumn="name">Nombre</th>
-            <th>Administrador</th>
-            <th>Opciones</th>
+            <th class="text-center" pSortableColumn="img">Avatar</th>
+            <th class="text-center" pSortableColumn="username">Username </th>
+            <th class="text-center" pSortableColumn="email">Email </th>
+            <th class="text-center" pSortableColumn="name">Nombre</th>
+            <th class="text-center">Administrador</th>
+            <th class="text-center">Opciones</th>
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-user>
           <tr>
-            <td ><img src="{{user.img}}" class="img" img align="center" width="40px" alt="Avatar" height="40px"></td>
-            <td >{{user.username}}</td>
-            <td >{{user.email}}</td>
-            <td >{{user.name}}</td>
+            <td class="text-center"><img src="{{user.img}}" class="img" img align="center" width="40px" alt="Avatar" height="40px"></td>
+            <td class="text-center">{{user.username}}</td>
+            <td class="text-center">{{user.email}}</td>
+            <td class="text-center">{{user.name}}</td>
            
-            <td> 
+            <td class="text-center"> 
               
               <div class="form-check form-switch" *ngIf="userActual.username!=user.username">
                 
@@ -45,7 +45,7 @@
               </div>
             </td>
           
-            <td *ngIf="user.username!=usernameActual">
+            <td class="text-center" *ngIf="user.username!=usernameActual">
             <button pButton icon="pi pi-trash" [routerLink]="['/users/deleteUsers', user.username]" routerLinkActive="router-link-active"  label="Borrar"></button>
           </td>
           </tr>

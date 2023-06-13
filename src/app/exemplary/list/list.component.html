@@ -22,9 +22,9 @@
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,15,20]">
       <ng-template pTemplate="header">
           <tr>
-            <th pSortableColumn="modelo">Modelo </th>
-            <th pSortableColumn="marca">Marca del modelo </th>
-            <th>Administrador
+            <th class="text-center" pSortableColumn="modelo">Modelo </th>
+            <th class="text-center" pSortableColumn="marca">Marca del modelo </th>
+            <th class="text-center">Administrador
 
             </th>
 
@@ -35,9 +35,9 @@
       </ng-template>
       <ng-template pTemplate="body" let-exemplary>
           <tr>
-            <td >{{exemplary.name_exemplary}}</td>
-            <td >{{exemplary.name_brand.name_brand}}</td>
-            <td *ngIf="role=='ADMIN'">
+            <td class="text-center">{{exemplary.name_exemplary}}</td>
+            <td class="text-center">{{exemplary.name_brand.name_brand}}</td>
+            <td class="text-center" *ngIf="role=='ADMIN'">
                 <a href="#" [routerLink]="['/exemplary/updateExemplary',exemplary.name_exemplary]" class="btn btn-warning actualizar">Actualizar Modelo</a>
                 &nbsp;&nbsp;
         

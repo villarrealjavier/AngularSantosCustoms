@@ -20,10 +20,10 @@
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,15,20]">
       <ng-template pTemplate="header">
           <tr>
-            <th>Imagen del vehículo</th>
-            <th pSortableColumn="img">Numero de bastidor</th>
-            <th pSortableColumn="username">Usuario</th>
-            <th pSortableColumn="email">Fecha </th>
+            <th class="text-center">Imagen del vehículo</th>
+            <th class="text-center" pSortableColumn="img">Numero de bastidor</th>
+            <th class="text-center" pSortableColumn="username">Usuario</th>
+            <th class="text-center" pSortableColumn="email">Fecha </th>
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-purchase>
@@ -60,9 +60,9 @@
                 <!--<img src="{{car.listImages[0].img}}" width="250px" height="160px">-->
                 
               </td>
-            <td >{{purchase.num_bastidor.num_bastidor}}</td>
-            <td >{{purchase.username.username}}</td>
-            <td>{{ purchase.date[2]}}-{{purchase.date[1]}}-{{purchase.date[0]}}</td>        
+            <td class="text-center">{{purchase.num_bastidor.num_bastidor}}</td>
+            <td class="text-center">{{purchase.username.username}}</td>
+            <td class="text-center">{{ purchase.date[2]}}-{{purchase.date[1]}}-{{purchase.date[0]}}</td>        
           </tr>
       </ng-template>
   </p-table>

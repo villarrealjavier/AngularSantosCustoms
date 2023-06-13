@@ -43,7 +43,7 @@
             <th class="text-center" pSortableColumn="cubic_cent">Centimetros Cúbicos</th>
             <th class="text-center" pSortableColumn="hp">Potencia</th>
         
-            <th *ngIf="role=='ADMIN'">Administrador</th>
+            <th class="text-center" *ngIf="role=='ADMIN'">Administrador</th>
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-car>
