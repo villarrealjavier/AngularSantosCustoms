@@ -49,7 +49,7 @@
           <h5 align="center" class="card-title mt-4">{{car.name_exemplary.name_brand.name_brand}}</h5>
           <p align="center"class="card-text">{{car.name_exemplary.name_exemplary}}</p>
           <p align="center">Precio: {{car.price}}</p>
-          <p align="center"><button class=" mt-2" pButton icon="pi pi-trash" (click)="addShoppingCart(car)" arial-label="Añadir al carrito">Añadir al carrito</button><br></p>
+          <p align="center" *ngIf="role=='USER' && car.sold!=true"><button class=" mt-2" pButton icon="pi pi-trash" (click)="addShoppingCart(car)" arial-label="Añadir al carrito">Añadir al carrito</button><br></p>
          
     
 

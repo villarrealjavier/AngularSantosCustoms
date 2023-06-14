@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class CarsForBrandComponent {
 
   carsbyBrand:cars[]=[] //Lista de coches
+  role:string | null=localStorage.getItem("role") //Obtenemos el rol del localStorage para determinar su vista en el html
 
   //Implementamos el activateRouter, para recoger el parametro y el servicio de coches
   constructor(private route:ActivatedRoute,private service:CarsService, private shoppingService:ShoppingService){
