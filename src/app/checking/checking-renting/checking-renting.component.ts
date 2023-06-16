@@ -30,7 +30,7 @@ export class CheckingRentingComponent {
       this.num_bastidor=params['car']  //Recoge el codigo de los parametros mediante los queryParams
       this.id=params['car']  //Recoge el codigo de los parametros mediante los queryParams
       this.username=params['username']//Recoge el username de los parametros mediante los queryParams
-      console.log(this.num_bastidor, this.id,this.username)
+      
       this.shoppingService.getRenting(this.id).subscribe({
         next:(resp)=>{
           this.car=resp.num_bastidor;

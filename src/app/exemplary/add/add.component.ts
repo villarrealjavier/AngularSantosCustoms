@@ -60,7 +60,7 @@ export class AddComponent {
     this.name_brand=this.myForm.get('name_brand')?.value
     this.brandService.getBrandbyId(this.name_brand).subscribe({ //Realiza la peticion llamando al servicio, y busca la marca por id
       next:(resp)=>{
-        console.log(resp)
+       
         this.brand=resp //Asigna la marca a una variable
         return this.exemplaryService.saveExemplary(this.name_exemplary,this.brand).subscribe({ // Realiza la peticion para guardar el modelo llamando al servicio
           next:(resp)=>{
